@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="14291651_1788553698026505_8028243464573325406_n" translatesAutoresizingMaskIntoConstraints="NO" id="wC9-6C-Blr">
-                                <rect key="frame" x="-43" y="69" width="524" height="529"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="專題LOGO (1)" translatesAutoresizingMaskIntoConstraints="NO" id="wC9-6C-Blr">
+                                <rect key="frame" x="-37" y="158" width="449" height="489"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -33,6 +33,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="14291651_1788553698026505_8028243464573325406_n" width="958" height="960"/>
+        <image name="專題LOGO (1)" width="495" height="495"/>
     </resources>
 </document>

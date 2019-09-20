@@ -10,7 +10,20 @@ import UIKit
 import WebKit
 class WebView: UIViewController {
     
+    @IBAction func nextPage(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToPC", sender: nil)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "goToPC" {
+
+            let secondVC = segue.destination as! pageviewcontroller
+
+            secondVC.received = 2
+
+        }
+    }
     
     @IBOutlet weak var WebView: WKWebView!
     

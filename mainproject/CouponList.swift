@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SQLite
 
 //connection
 struct WebSiteDescription:Decodable{
@@ -44,12 +44,54 @@ class CouponList: UITableViewController {
     
     var coupon : [Coupon] = []
     
+    var database: Connection!
+    let usersTable = Table("Token1")
+    let id = Expression<Int>("id")
+    let token = Expression<String>("token")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedBackgroundView.backgroundColor = UIColor.clear
         
         coupon = createArray()
-
+//_______________sqlite connect______________
+        
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileUrl = documentDirectory.appendingPathComponent("users").appendingPathExtension("sqlite3")
+            let database = try Connection(fileUrl.path)
+            
+            self.database = database
+            print("connected")
+        } catch {
+            print(error)
+        }
+        
+//        print("CREATE TAPPED")
+//
+//        let createTable = self.usersTable.create { (table) in
+//            table.column(self.id, primaryKey: true)
+//            table.column(self.token, unique: true)
+//        }
+//        do {
+//            try self.database.run(createTable)
+//            print("Created Table")
+//        } catch {
+//            print(error)
+//        }
+        
+        print("LIST TAPPED")
+        
+        do {
+            let users = try self.database.prepare(self.usersTable)
+            for user in users {
+               
+                print("token: \(user[self.token])")
+                print("tokenId: \(user[self.id])")
+            }
+        } catch {
+            print(error)
+        }
 //---------------connection------------------
         let JsonURL = "http://4bf3838d.ngrok.io/coupons/"
         

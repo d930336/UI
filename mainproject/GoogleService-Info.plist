@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>234150035520-cie4q9b775lfhmp34q4i4eh6sj5edlig.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.234150035520-cie4q9b775lfhmp34q4i4eh6sj5edlig</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDimOeNpN1TwEYGc2tfyR2z4MimOWd_mg4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>234150035520</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.self.mainproject</string>
+	<key>PROJECT_ID</key>
+	<string>collegeproject-d3f6d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>collegeproject-d3f6d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:234150035520:ios:7cbc5f44f2ff20ca671fa5</string>
+	<key>DATABASE_URL</key>
+	<string>https://collegeproject-d3f6d.firebaseio.com</string>
+</dict>
+</plist>

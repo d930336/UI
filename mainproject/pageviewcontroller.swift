@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
 
 class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
 
+    
+    
     var list = [UIViewController]()
+    var received : Int = 1
   /*
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -26,7 +30,25 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+//------------notification-------------------
+//        let content = UNMutableNotificationContent()
+//        content.title = "發大財"
+//        //        content.subtitle = "subtitle："
+//        content.body = "記一筆？ 台灣發大財關心您"
+//        content.badge = 0
+//        content.sound = UNNotificationSound.default
+//
+//        let date = Date(timeIntervalSinceNow: 36000)
+//
+//      let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//
+//        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+//
+//
+//    UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
+//        print("成功建立通知...")
+//        })
+//------------page controll------------------
         let p0 = storyboard?.instantiateViewController(withIdentifier: "p0")
         let p1 = storyboard?.instantiateViewController(withIdentifier: "p1")
         let p2 = storyboard?.instantiateViewController(withIdentifier: "p2")
@@ -35,9 +57,9 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
         list.append(p1!)
         list.append(p2!)
         
-        setViewControllers([list[1]], direction: .forward, animated: true, completion: nil)
+        setViewControllers([list[received]], direction: .forward, animated: true, completion: nil)
         
-        
+
         dataSource = self
         // Do any additional setup after loading the view.
     }
