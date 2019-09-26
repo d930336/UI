@@ -166,6 +166,8 @@ class targetPage: UIViewController {
             print("建立通知intial")
         })
         
+        
+        
         if (sender as AnyObject).isOn {
             controll = triggerOff
             controllContent = content2

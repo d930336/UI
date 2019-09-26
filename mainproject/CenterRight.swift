@@ -23,6 +23,7 @@ class CenterRight: UIViewController {
     ]
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +34,7 @@ class CenterRight: UIViewController {
         self.background.layer.shadowOffset = CGSize(width: 5 ,height: 5)
         self.background.layer.shadowRadius = 5
         
-//        pie.models = createModels()
+        pie.models = createModels()
 //--------------------------sqlite viewdidload---------------
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -47,22 +48,24 @@ class CenterRight: UIViewController {
     
         print("LIST TAPPED")
         
-        do {
-            let users = try self.database.prepare(self.usersTable)
-            for user in users {
-                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-                let model = PieSliceModel(value:Double(user[self.sqPrice]), color: colors[0])
-              
-
-                pie.insertSlice(index: Int(user[self.sqPrice]), model: PieSliceModel(value:Double(user[self.sqPrice]), color: colors[0]))
-                
-                pie.models.append(model)
-                
-                }
-            
-        } catch {
-            print(error)
-        }
+//        do {
+//            let users = try self.database.prepare(self.usersTable)
+//            for user in users {
+//                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
+//                let model = PieSliceModel(value:Double(user[self.sqPrice]), color: colors[0])
+//
+//
+//                pie.insertSlice(index: Int(user[self.sqPrice]), model: PieSliceModel(value:Double(user[self.sqPrice]), color: colors[0]))
+//
+//                pie.models.append(model)
+//
+//                pie.reloadInputViews()
+//
+//                }
+//
+//        } catch {
+//            print(error)
+//        }
 
     }
 //--------------------------sqlite---------------------------
@@ -78,19 +81,37 @@ class CenterRight: UIViewController {
     var currentColorIndex = 0
     
     func createModels() -> [PieSliceModel] {
+        var models: [PieSliceModel] = []
 
-//        let model1 = PieSliceModel(value: 2.1, color: colors[0])
-//        let model2 = PieSliceModel(value: 3, color: colors[1])
-//        let model3 = PieSliceModel(value: 1, color: colors[2])
-//
-//        generateModels.append(model1)
-//        generateModels.append(model2)
-//        generateModels.append(model3)
-        return pie.models
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileUrl = documentDirectory.appendingPathComponent("users").appendingPathExtension("sqlite3")
+            let database = try Connection(fileUrl.path)
+            self.database = database
+            print("connected")
+        } catch {
+            print(error)
+        }
+        do {
+            let users = try self.database.prepare(self.usersTable)
+            for user in users {
+                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
+                let randomColor = Int.random(in: 0...4)
+                let model = PieSliceModel(value:Double(user[self.sqPrice]), color: colors[randomColor])
+                //                pie.insertSlice(index: Int(user[self.sqPrice]), model: PieSliceModel(value:Double(user[self.sqPrice]), color: colors[0]))
+                
+               models.append(model)
+                
+                }
+            
+        } catch {
+            print(error)
+        }
+//        return pie.models
 //        return generateModels
         
 //        currentColorIndex = models.count
-//        return models
+        return models
     }
     
     func onGenerateSlice(slice: PieSlice){

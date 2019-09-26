@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7D4EB929E79B55D79880A230 /* Pods_mainprojectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD61753DDDECDC9D8A193B3B /* Pods_mainprojectUITests.framework */; };
+		8D1A8804233766B700E9BC5B /* RightPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A8803233766B700E9BC5B /* RightPage.swift */; };
+		8D1A88062337705200E9BC5B /* CouponCellFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A88052337705200E9BC5B /* CouponCellFormat.swift */; };
+		8D1A88082337719000E9BC5B /* CouponArrayFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A88072337719000E9BC5B /* CouponArrayFormat.swift */; };
 		8D1BC2EF22F00CAE0075BBAE /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BC2EE22F00CAE0075BBAE /* Lock.swift */; };
 		8D1BC2F122F037830075BBAE /* CenterLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BC2F022F037830075BBAE /* CenterLeftCell.swift */; };
 		8D234C1222396A1200661202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D234C1122396A1200661202 /* AppDelegate.swift */; };
@@ -19,6 +22,7 @@
 		8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */; };
 		8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */; };
 		8D39B73F2244D1FB001A9358 /* CenterCenterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */; };
+		8D615E3D2338963C00FEF86C /* TestPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D615E3C2338963C00FEF86C /* TestPage.swift */; };
 		8D640CC5225B38730090CEEF /* CenterLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D640CC4225B38730090CEEF /* CenterLeft.swift */; };
 		8D640CC7225B38870090CEEF /* CenterRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D640CC6225B38870090CEEF /* CenterRight.swift */; };
 		8D640CCD225F393B0090CEEF /* CenterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D640CCC225F393B0090CEEF /* CenterPage.swift */; };
@@ -28,15 +32,11 @@
 		8D7795BF22AFA3D100770F08 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7795BE22AFA3D100770F08 /* LogIn.swift */; };
 		8D77965C22C5F4DD00770F08 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D77965B22C5F4DD00770F08 /* SignUp.swift */; };
 		8D9B9516223A626900B02102 /* pageviewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B9515223A626900B02102 /* pageviewcontroller.swift */; };
-		8D9B9518223A842B00B02102 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B9517223A842B00B02102 /* CouponCell.swift */; };
-		8D9B951C223A85E900B02102 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B951B223A85E900B02102 /* Coupon.swift */; };
-		8D9B9522223A887700B02102 /* CouponList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B9521223A887700B02102 /* CouponList.swift */; };
 		8D9B957E2241613D00B02102 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9B957D2241613D00B02102 /* WebView.swift */; };
 		8DE06815224CF8BC00173DAA /* CenterCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE06814224CF8BC00173DAA /* CenterCenter.swift */; };
 		8DF76CAA22D5C98000B4CD7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DF76CA922D5C98000B4CD7E /* Assets.xcassets */; };
 		8DF76CAC22DDB28300B4CD7E /* GoogleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF76CAB22DDB28300B4CD7E /* GoogleLogin.swift */; };
 		8DF8915C2309031A0044194B /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF8915B2309031A0044194B /* ForgotPassword.swift */; };
-		8DF8915E230D18240044194B /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF8915D230D18240044194B /* test.swift */; };
 		9929735DB50DEB7CE9268525 /* Pods_mainprojectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3F6D66C2E2B005932A7E23 /* Pods_mainprojectTests.framework */; };
 		C264445A89E6CE01EF454CAD /* Pods_mainproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D72AC837932FF5578FF073 /* Pods_mainproject.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +65,9 @@
 		56C659FB77E6FC0D3860FAB6 /* Pods-mainproject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mainproject.release.xcconfig"; path = "Target Support Files/Pods-mainproject/Pods-mainproject.release.xcconfig"; sourceTree = "<group>"; };
 		6030F168EBED344701EA81B4 /* Pods-mainprojectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mainprojectTests.release.xcconfig"; path = "Target Support Files/Pods-mainprojectTests/Pods-mainprojectTests.release.xcconfig"; sourceTree = "<group>"; };
 		7744678EAFCEFBD7F01EC262 /* Pods-mainproject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mainproject.debug.xcconfig"; path = "Target Support Files/Pods-mainproject/Pods-mainproject.debug.xcconfig"; sourceTree = "<group>"; };
+		8D1A8803233766B700E9BC5B /* RightPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightPage.swift; sourceTree = "<group>"; };
+		8D1A88052337705200E9BC5B /* CouponCellFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCellFormat.swift; sourceTree = "<group>"; };
+		8D1A88072337719000E9BC5B /* CouponArrayFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponArrayFormat.swift; sourceTree = "<group>"; };
 		8D1BC2EE22F00CAE0075BBAE /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		8D1BC2F022F037830075BBAE /* CenterLeftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLeftCell.swift; sourceTree = "<group>"; };
 		8D234C0E22396A1200661202 /* mainproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mainproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +85,7 @@
 		8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailForm.swift; sourceTree = "<group>"; };
 		8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailCell.swift; sourceTree = "<group>"; };
 		8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCenterPage.swift; sourceTree = "<group>"; };
+		8D615E3C2338963C00FEF86C /* TestPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPage.swift; sourceTree = "<group>"; };
 		8D640CC4225B38730090CEEF /* CenterLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLeft.swift; sourceTree = "<group>"; };
 		8D640CC6225B38870090CEEF /* CenterRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRight.swift; sourceTree = "<group>"; };
 		8D640CCC225F393B0090CEEF /* CenterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPage.swift; sourceTree = "<group>"; };
@@ -92,15 +96,11 @@
 		8D7795BE22AFA3D100770F08 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		8D77965B22C5F4DD00770F08 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		8D9B9515223A626900B02102 /* pageviewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageviewcontroller.swift; sourceTree = "<group>"; };
-		8D9B9517223A842B00B02102 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
-		8D9B951B223A85E900B02102 /* Coupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
-		8D9B9521223A887700B02102 /* CouponList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponList.swift; sourceTree = "<group>"; };
 		8D9B957D2241613D00B02102 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8DE06814224CF8BC00173DAA /* CenterCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCenter.swift; sourceTree = "<group>"; };
 		8DF76CA922D5C98000B4CD7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DF76CAB22DDB28300B4CD7E /* GoogleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLogin.swift; sourceTree = "<group>"; };
 		8DF8915B2309031A0044194B /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
-		8DF8915D230D18240044194B /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		AB3F6D66C2E2B005932A7E23 /* Pods_mainprojectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mainprojectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD61753DDDECDC9D8A193B3B /* Pods_mainprojectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mainprojectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D72AC837932FF5578FF073 /* Pods_mainproject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mainproject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,19 +185,19 @@
 				8D1BC2F022F037830075BBAE /* CenterLeftCell.swift */,
 				8D640CC6225B38870090CEEF /* CenterRight.swift */,
 				8D779566229E889A00770F08 /* TargetPage.swift */,
-				8DF8915B2309031A0044194B /* ForgotPassword.swift */,
-				8D1BC2EE22F00CAE0075BBAE /* Lock.swift */,
+				8D615E3C2338963C00FEF86C /* TestPage.swift */,
 				8D7795BE22AFA3D100770F08 /* LogIn.swift */,
-				8DF8915D230D18240044194B /* test.swift */,
 				8D77965B22C5F4DD00770F08 /* SignUp.swift */,
+				8DF8915B2309031A0044194B /* ForgotPassword.swift */,
 				8D640CD222605AC00090CEEF /* DailyDetail.swift */,
 				8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */,
 				8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */,
-				8D9B9521223A887700B02102 /* CouponList.swift */,
-				8D9B951B223A85E900B02102 /* Coupon.swift */,
-				8D9B9517223A842B00B02102 /* CouponCell.swift */,
+				8D1A8803233766B700E9BC5B /* RightPage.swift */,
+				8D1A88072337719000E9BC5B /* CouponArrayFormat.swift */,
+				8D1A88052337705200E9BC5B /* CouponCellFormat.swift */,
 				8DF76CAB22DDB28300B4CD7E /* GoogleLogin.swift */,
 				8D9B957D2241613D00B02102 /* WebView.swift */,
+				8D1BC2EE22F00CAE0075BBAE /* Lock.swift */,
 				8DF76CA922D5C98000B4CD7E /* Assets.xcassets */,
 				8D234C1A22396A1300661202 /* LaunchScreen.storyboard */,
 				8D234C1D22396A1300661202 /* Info.plist */,
@@ -498,26 +498,26 @@
 			files = (
 				8D9B957E2241613D00B02102 /* WebView.swift in Sources */,
 				8D640CC5225B38730090CEEF /* CenterLeft.swift in Sources */,
+				8D615E3D2338963C00FEF86C /* TestPage.swift in Sources */,
 				8D1BC2EF22F00CAE0075BBAE /* Lock.swift in Sources */,
 				8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */,
 				8D640CC7225B38870090CEEF /* CenterRight.swift in Sources */,
 				8D9B9516223A626900B02102 /* pageviewcontroller.swift in Sources */,
-				8D9B9522223A887700B02102 /* CouponList.swift in Sources */,
+				8D1A88062337705200E9BC5B /* CouponCellFormat.swift in Sources */,
 				8DF76CAC22DDB28300B4CD7E /* GoogleLogin.swift in Sources */,
 				8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */,
 				8D7795BF22AFA3D100770F08 /* LogIn.swift in Sources */,
-				8D9B9518223A842B00B02102 /* CouponCell.swift in Sources */,
 				8DF8915C2309031A0044194B /* ForgotPassword.swift in Sources */,
 				8D1BC2F122F037830075BBAE /* CenterLeftCell.swift in Sources */,
 				8D640CD322605AC00090CEEF /* DailyDetail.swift in Sources */,
 				8D234C1222396A1200661202 /* AppDelegate.swift in Sources */,
-				8D9B951C223A85E900B02102 /* Coupon.swift in Sources */,
 				8D640CCD225F393B0090CEEF /* CenterPage.swift in Sources */,
+				8D1A8804233766B700E9BC5B /* RightPage.swift in Sources */,
 				8D39B73F2244D1FB001A9358 /* CenterCenterPage.swift in Sources */,
 				8D77965C22C5F4DD00770F08 /* SignUp.swift in Sources */,
 				8DE06815224CF8BC00173DAA /* CenterCenter.swift in Sources */,
 				8D779567229E889A00770F08 /* TargetPage.swift in Sources */,
-				8DF8915E230D18240044194B /* test.swift in Sources */,
+				8D1A88082337719000E9BC5B /* CouponArrayFormat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

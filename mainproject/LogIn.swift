@@ -29,7 +29,7 @@ class LogIn: UIViewController {
         let session = URLSession(configuration: .default)
         // 设置URL
         let url = "https://1e70f92c.ngrok.io/api-token-auth/"
-        var request = URLRequest(url:URL(string:"https://1e70f92c.ngrok.io/api-token-auth/")!)
+        var request = URLRequest(url:URL(string:"https://1b6994f3.ngrok.io/api-token-auth/")!)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         

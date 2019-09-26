@@ -92,7 +92,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     @IBAction func dateAction(_ sender: UIDatePicker) {
         let dateValue = DateFormatter()
-        dateValue.dateFormat = "MM dd" // 設定要顯示在Text Field的日期時間格式
+        dateValue.dateFormat = "MMdd" // 設定要顯示在Text Field的日期時間格式
         datedata = dateValue.string(from: getDateValue.date) // 更新Text Field的內容
  
     }
@@ -181,10 +181,12 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
    
 //        tableView.transform = CGAffineTransform(rotationAngle: .pi) ㄓ反方向
         
+//------------------------make table be bottom---------------
+   
     //-------------------initiate the date to today----------
         let todaysDate = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM dd"
+        dateFormatter.dateFormat = "MMdd"
         let dateString = dateFormatter.string(from: todaysDate)
         datedata = dateString
     
@@ -225,8 +227,6 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
             print(error)
         }
         
-    
-        print("LIST TAPPED")
         
         do {
             let users = try self.database.prepare(self.usersTable)
@@ -241,7 +241,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
                 tableView.beginUpdates()
                 tableView.insertRows(at:[indexPath], with: .automatic)
                 tableView.endUpdates()
-  
+                
                 }
             
              let query = usersTable.select(self.sqPrice.sum,sqName)
@@ -256,10 +256,20 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         } catch {
             print(error)
         }
+//---------------swipe--------------------
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+        edgePan.edges = .right
         
-    
-    
+        view.addGestureRecognizer(edgePan)
     }
+    
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            print("Screen edge swiped!")
+            show((storyboard?.instantiateViewController(withIdentifier: "pageController"))! , sender: nil)
+        }
+    }
+    
     
  
  //----------------delete row---------------------------
@@ -364,19 +374,19 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         
 
         
-        print("LIST TAPPED")
-        
-        do {
-            let users = try self.database.prepare(self.usersTable)
-            for user in users {
-                
-                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-                
-
-            }
-        } catch {
-            print(error)
-        }
+//        print("LIST TAPPED")
+//
+//        do {
+//            let users = try self.database.prepare(self.usersTable)
+//            for user in users {
+//
+//                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
+//
+//
+//            }
+//        } catch {
+//            print(error)
+//        }
        
     }
     
@@ -392,6 +402,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         return tempDetail
         
     }
+  
     
 }
 
@@ -430,32 +441,8 @@ extension DailyDetail:UITableViewDataSource,UITableViewDelegate {
         
     }
     
-    
+   
     
 }
 
-
-
-
-/*extension UIViewController : UIPickerViewDataSource ,UIPickerViewDelegate{
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        
-    }
-    
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-    }
-   */
-   
-    //to show the type
-    /* public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-    }
-    */
-    
 

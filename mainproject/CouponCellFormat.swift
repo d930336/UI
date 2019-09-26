@@ -1,25 +1,29 @@
 //
-//  CouponCell.swift
+//  CouponCellFormat.swift
 //  mainproject
 //
-//  Created by Benson Yang on 2019/3/14.
+//  Created by Benson Yang on 2019/9/22.
 //  Copyright © 2019 Benson Yang. All rights reserved.
 //
 
 import UIKit
 
-class CouponCell: UITableViewCell {
+class CouponCellFormat: UITableViewCell {
 
-   
-    @IBOutlet weak var CouponStore: UILabel!
-    @IBOutlet weak var CouponDiscount: UILabel!
+  
+    @IBOutlet weak var Store: UILabel!
+    @IBOutlet weak var Content: UILabel!
+    @IBOutlet weak var Kind: UILabel!
     
-    func setCoupon(coupon: Coupon){
-        CouponStore.text = coupon.Store
-        CouponDiscount.text = coupon.Discount
-   }
     
-   
+    
+    func setCoupon(coupon: CouponArrayFormat){
+        Store.text = coupon.Store
+        Content.text = coupon.Content
+        Kind.text = coupon.Kind
+    }
+    
+    
     override var frame: CGRect {
         get {
             return super.frame
@@ -34,7 +38,9 @@ class CouponCell: UITableViewCell {
             super.frame = frame
         }
     }
- 
+    
+    
     
   
+
 }
