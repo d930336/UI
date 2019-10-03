@@ -17,7 +17,7 @@ class RightPage: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let cellSpacingHeight: CGFloat = 10
+//    let cellSpacingHeight: CGFloat = 10
     let selectedBackgroundView = UIView()
     
     var couponList : [CouponArrayFormat] = []
@@ -27,19 +27,33 @@ class RightPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        selectedBackgroundView.backgroundColor = UIColor.clear
+        let coupon1 = CouponArrayFormat(Store: "KFC", Content:"10%OFF",Kind:"food")
+        let coupon2 = CouponArrayFormat(Store: "MOS", Content:"20%OFF",Kind:"food")
+        let coupon3 = CouponArrayFormat(Store: "StarBucks", Content:"100%OFF",Kind:"food")
+        let coupon4 = CouponArrayFormat(Store: "7-11", Content:"45%OFF",Kind:"food")
         
-        couponList = createArray()
+        couponList.append(coupon1)
+        couponList.append(coupon2)
+        couponList.append(coupon3)
+        couponList.append(coupon4)
+        
+        let indexPath = IndexPath(row: couponList.count - 1,section :0)
+      
+        tableView.beginUpdates()
+       tableView.insertRows(at:[indexPath], with: .automatic)
+        tableView.endUpdates()
+//        couponList = createArray()
       
     
-    func tableView(_ tableView: UITableView, heightForFootererInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFootererInSection section: Int) -> UIView? {
-        let footerView = UIView()
-        footerView.backgroundColor = UIColor.clear
-        return footerView
-    }
+//    func tableView(_ tableView: UITableView, heightForFootererInSection section: Int) -> CGFloat {
+//        return cellSpacingHeight
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForFootererInSection section: Int) -> UIView? {
+//        let footerView = UIView()
+//        footerView.backgroundColor = UIColor.clear
+//        return footerView
+//    }
     
 
 }
@@ -50,23 +64,22 @@ class RightPage: UIViewController {
     
     
     
-    func createArray() -> [CouponArrayFormat]{
-        
-        var tempCoupon: [CouponArrayFormat] = []
-        
-        let coupon1 = CouponArrayFormat(Store: "KFC", Content:"10%OFF",Kind:"food")
-        let coupon2 = CouponArrayFormat(Store: "MOS", Content:"20%OFF",Kind:"food")
-        let coupon3 = CouponArrayFormat(Store: "StarBucks", Content:"100%OFF",Kind:"food")
-        let coupon4 = CouponArrayFormat(Store: "7-11", Content:"45%OFF",Kind:"food")
-        
-        tempCoupon.append(coupon1)
-        tempCoupon.append(coupon2)
-        tempCoupon.append(coupon3)
-        tempCoupon.append(coupon4)
-        let indexPath = IndexPath(row: couponList.count - 1,section :0)
-        
-        return tempCoupon
-    }
+//    func createArray() -> [CouponArrayFormat]{
+//
+//        var tempCoupon: [CouponArrayFormat] = []
+//
+//        let coupon1 = CouponArrayFormat(Store: "KFC", Content:"10%OFF",Kind:"food")
+//        let coupon2 = CouponArrayFormat(Store: "MOS", Content:"20%OFF",Kind:"food")
+//        let coupon3 = CouponArrayFormat(Store: "StarBucks", Content:"100%OFF",Kind:"food")
+//        let coupon4 = CouponArrayFormat(Store: "7-11", Content:"45%OFF",Kind:"food")
+//
+//        tempCoupon.append(coupon1)
+//        tempCoupon.append(coupon2)
+//        tempCoupon.append(coupon3)
+//        tempCoupon.append(coupon4)
+//
+//        return tempCoupon
+//    }
     
 }
 

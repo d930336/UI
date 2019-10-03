@@ -120,7 +120,7 @@ class CenterPage: UIViewController {
     
     
     let chartConfig = BarsChartConfig(
-        valsAxisConfig : ChartAxisConfig(from:0 , to:100 ,by:10)
+        valsAxisConfig : ChartAxisConfig(from:0 , to:100 ,by:100)
     )
     
     let frameLeft = CGRect(x : 30 , y : 630 ,width:138,height:31)

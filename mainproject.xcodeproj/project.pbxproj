@@ -16,12 +16,14 @@
 		8D234C1222396A1200661202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D234C1122396A1200661202 /* AppDelegate.swift */; };
 		8D234C1722396A1200661202 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D234C1522396A1200661202 /* Main.storyboard */; };
 		8D234C1C22396A1300661202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D234C1A22396A1300661202 /* LaunchScreen.storyboard */; };
-		8D234C2722396A1300661202 /* mainprojectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D234C2622396A1300661202 /* mainprojectTests.swift */; };
-		8D234C3222396A1300661202 /* mainprojectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D234C3122396A1300661202 /* mainprojectUITests.swift */; };
 		8D26CC6B233485C600661DD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */; };
 		8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */; };
 		8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */; };
 		8D39B73F2244D1FB001A9358 /* CenterCenterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */; };
+		8D3BB0B323459D9B00EFF00A /* StringPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BB0B223459D9B00EFF00A /* StringPage.swift */; };
+		8D5A88B92340A6E900E5D0A6 /* welcomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */; };
+		8D5A88BB2340A9B900E5D0A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */; };
+		8D5A88BD2340A9C900E5D0A6 /* CustomPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */; };
 		8D615E3D2338963C00FEF86C /* TestPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D615E3C2338963C00FEF86C /* TestPage.swift */; };
 		8D640CC5225B38730090CEEF /* CenterLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D640CC4225B38730090CEEF /* CenterLeft.swift */; };
 		8D640CC7225B38870090CEEF /* CenterRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D640CC6225B38870090CEEF /* CenterRight.swift */; };
@@ -76,15 +78,15 @@
 		8D234C1B22396A1300661202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D234C1D22396A1300661202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D234C2222396A1300661202 /* mainprojectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mainprojectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D234C2622396A1300661202 /* mainprojectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainprojectTests.swift; sourceTree = "<group>"; };
-		8D234C2822396A1300661202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D234C2D22396A1300661202 /* mainprojectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mainprojectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D234C3122396A1300661202 /* mainprojectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainprojectUITests.swift; sourceTree = "<group>"; };
-		8D234C3322396A1300661202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailForm.swift; sourceTree = "<group>"; };
 		8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailCell.swift; sourceTree = "<group>"; };
 		8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCenterPage.swift; sourceTree = "<group>"; };
+		8D3BB0B223459D9B00EFF00A /* StringPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPage.swift; sourceTree = "<group>"; };
+		8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = welcomePage.storyboard; sourceTree = "<group>"; };
+		8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "../../../../Downloads/BWWalkthrough-master/Example/ViewController.swift"; sourceTree = "<group>"; };
+		8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageViewController.swift; sourceTree = "<group>"; };
 		8D615E3C2338963C00FEF86C /* TestPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPage.swift; sourceTree = "<group>"; };
 		8D640CC4225B38730090CEEF /* CenterLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLeft.swift; sourceTree = "<group>"; };
 		8D640CC6225B38870090CEEF /* CenterRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRight.swift; sourceTree = "<group>"; };
@@ -152,8 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				8D234C1022396A1200661202 /* mainproject */,
-				8D234C2522396A1300661202 /* mainprojectTests */,
-				8D234C3022396A1300661202 /* mainprojectUITests */,
 				8D234C0F22396A1200661202 /* Products */,
 				05B7E1009642BFB6B809BB0D /* Pods */,
 				9800A10C6AE0177C0C1104E6 /* Frameworks */,
@@ -176,6 +176,10 @@
 				8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */,
 				8D7795BB22A7B66500770F08 /* BridgeHeader.h */,
 				8D234C1122396A1200661202 /* AppDelegate.swift */,
+				8D3BB0B223459D9B00EFF00A /* StringPage.swift */,
+				8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */,
+				8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */,
+				8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */,
 				8D234C1522396A1200661202 /* Main.storyboard */,
 				8D9B9515223A626900B02102 /* pageviewcontroller.swift */,
 				8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */,
@@ -203,24 +207,6 @@
 				8D234C1D22396A1300661202 /* Info.plist */,
 			);
 			path = mainproject;
-			sourceTree = "<group>";
-		};
-		8D234C2522396A1300661202 /* mainprojectTests */ = {
-			isa = PBXGroup;
-			children = (
-				8D234C2622396A1300661202 /* mainprojectTests.swift */,
-				8D234C2822396A1300661202 /* Info.plist */,
-			);
-			path = mainprojectTests;
-			sourceTree = "<group>";
-		};
-		8D234C3022396A1300661202 /* mainprojectUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8D234C3122396A1300661202 /* mainprojectUITests.swift */,
-				8D234C3322396A1300661202 /* Info.plist */,
-			);
-			path = mainprojectUITests;
 			sourceTree = "<group>";
 		};
 		9800A10C6AE0177C0C1104E6 /* Frameworks */ = {
@@ -347,6 +333,7 @@
 				8D26CC6B233485C600661DD7 /* GoogleService-Info.plist in Resources */,
 				8DF76CAA22D5C98000B4CD7E /* Assets.xcassets in Resources */,
 				8D234C1722396A1200661202 /* Main.storyboard in Resources */,
+				8D5A88B92340A6E900E5D0A6 /* welcomePage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +385,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-mainproject/Pods-mainproject-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BWWalkthrough/BWWalkthrough.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -410,6 +398,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BWWalkthrough.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -503,6 +492,8 @@
 				8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */,
 				8D640CC7225B38870090CEEF /* CenterRight.swift in Sources */,
 				8D9B9516223A626900B02102 /* pageviewcontroller.swift in Sources */,
+				8D5A88BB2340A9B900E5D0A6 /* ViewController.swift in Sources */,
+				8D5A88BD2340A9C900E5D0A6 /* CustomPageViewController.swift in Sources */,
 				8D1A88062337705200E9BC5B /* CouponCellFormat.swift in Sources */,
 				8DF76CAC22DDB28300B4CD7E /* GoogleLogin.swift in Sources */,
 				8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */,
@@ -518,6 +509,7 @@
 				8DE06815224CF8BC00173DAA /* CenterCenter.swift in Sources */,
 				8D779567229E889A00770F08 /* TargetPage.swift in Sources */,
 				8D1A88082337719000E9BC5B /* CouponArrayFormat.swift in Sources */,
+				8D3BB0B323459D9B00EFF00A /* StringPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +517,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D234C2722396A1300661202 /* mainprojectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +524,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D234C3222396A1300661202 /* mainprojectUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +686,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7MP4S8GA9;
 				INFOPLIST_FILE = mainproject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -715,6 +706,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7MP4S8GA9;
 				INFOPLIST_FILE = mainproject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

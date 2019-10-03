@@ -46,7 +46,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         }
     }
     
-    //---------------sqlite--------------------
+// MARK: - sqlite-
     
     var database: Connection!
     
@@ -58,12 +58,13 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
 
     
     
-    //----------------type---------------------
+ // MARK: - type---------------------
     
     @IBOutlet weak var pickerView: UIPickerView!
   
     @IBOutlet weak var tableView: UITableView!
     
+  
     
     let types = ["","Tools","Traffic","beverage","Place","Food","Sneak","Other"]
     
@@ -85,22 +86,28 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         typeShow = types[row]
     }
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string:types[row] , attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+    }
  
-  //--------------------date picker-----------------------------
+  // MARK: - ------date picker-------------------
     var datedata : String!
     @IBOutlet weak var getDateValue: UIDatePicker!
+   
+   
+    
     
     @IBAction func dateAction(_ sender: UIDatePicker) {
         let dateValue = DateFormatter()
         dateValue.dateFormat = "MMdd" // 設定要顯示在Text Field的日期時間格式
         datedata = dateValue.string(from: getDateValue.date) // 更新Text Field的內容
- 
+//        getDateValue.setValue(UIColor.black, forKeyPath: "textColor") 轉動時變顏色
     }
     
     
     
     
-  //--------------------calculator-------------------------------
+ // MARK: - --------------------calculator-------------------------------
     
     @IBOutlet weak var total: UILabel!
     
@@ -174,24 +181,23 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     var dailyDetailForm : [DailyDetailForm] = []
 
-    //-------------------viewdidload-------------------------
+  // MARK: - --viewdidload-------------------------
     override func viewDidLoad() {
        
         super.viewDidLoad()
-   
+        getDateValue.setValue(UIColor.black, forKeyPath: "textColor")
 //        tableView.transform = CGAffineTransform(rotationAngle: .pi) ㄓ反方向
         
-//------------------------make table be bottom---------------
    
-    //-------------------initiate the date to today----------
+// MARK: - ----initiate the date to today
         let todaysDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMdd"
         let dateString = dateFormatter.string(from: todaysDate)
         datedata = dateString
     
-    //-------------------initiate the picker value-----------
-        pickerView.selectRow(0, inComponent: 0, animated: true) //initiate the value of picker
+ // MARK: - ----initiate the picker value
+        pickerView.selectRow(1, inComponent: 0, animated: true) //initiate the value of picker
         
       
         selectedBackgroundView.backgroundColor = UIColor.clear
@@ -199,7 +205,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         dailyDetailForm = createArray()
         
         
-        //-----------sqlite view didlord-------
+// MARK: ----sqlite view didlord-------
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileUrl = documentDirectory.appendingPathComponent("users").appendingPathExtension("sqlite3")
@@ -256,7 +262,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         } catch {
             print(error)
         }
-//---------------swipe--------------------
+// MARK: -------swipe------
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
         edgePan.edges = .right
         
@@ -272,7 +278,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     
  
- //----------------delete row---------------------------
+// MARK:---delete row---
     
     @IBAction func deleteAll(_ sender: Any) {
         
@@ -291,7 +297,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         tableView.beginUpdates()
         tableView.deleteRows(at: [indexPath], with: .bottom)
         tableView.endUpdates()
-//----------------delete from sqlite-------------------
+// MARK:-delete from sqlite-------------------
       
 //        let del = usersTable
 //
@@ -310,7 +316,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         }
         
     }
- //------------setting margin---------------------
+// MARK:setting margin----
     func tableView(_ tableView: UITableView, heightForFootererInSection section: Int) -> CGFloat {
         return cellSpacingHeight
     }
@@ -335,16 +341,15 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     //去除tableView 多余行的方法 添加一个tableFooterView 后面多余行不再显示
     
-    //----------------------insert row-------------------------------
+  // MARK:-insert row-
     
     @IBAction func insert(_ sender: UIButton) {
         insertNewRow()
     }
-  
+  // MARK:---sqlite insert (save)
+
     func insertNewRow() {
-        
-//--------------sqlite insert---------------
-        
+                
         print("INSERT TAPPED")
         
             guard let sqDate = datedata,
@@ -371,23 +376,8 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
             } catch {
                 print(error)
             }
-        
-
-        
-//        print("LIST TAPPED")
-//
-//        do {
-//            let users = try self.database.prepare(self.usersTable)
-//            for user in users {
-//
-//                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-//
-//
-//            }
-//        } catch {
-//            print(error)
-//        }
-       
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
    
@@ -397,13 +387,8 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         
 //        let daily1 = DailyDetailForm(Date: "4/20", Name: "KFC", Price: "199", Coupon: "20%")
 //        tempDetail.append(daily1)
-     
-        
         return tempDetail
-        
     }
-  
-    
 }
 
 extension DailyDetail:UITableViewDataSource,UITableViewDelegate {

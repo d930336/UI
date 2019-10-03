@@ -1,4 +1,5 @@
 PODS:
+  - BWWalkthrough (3.0.1)
   - Firebase/Analytics (5.19.0):
     - Firebase/Core
   - Firebase/Auth (5.19.0):
@@ -80,6 +81,7 @@ PODS:
   - SwiftCharts (0.6.3)
 
 DEPENDENCIES:
+  - BWWalkthrough
   - Firebase/Analytics
   - Firebase/Auth
   - GoogleSignIn
@@ -89,6 +91,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BWWalkthrough
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -106,6 +109,7 @@ SPEC REPOS:
     - SwiftCharts
 
 SPEC CHECKSUMS:
+  BWWalkthrough: 8c0909d2a20791560816f5f03213557dd52a8a0d
   Firebase: c60d49e9c2630875a96207d15e2affb8364996d1
   FirebaseAnalytics: fd72a26bf8dac84cefba2f0864366f718555a5b0
   FirebaseAuth: cbb892a66baed025efc179372598941252acf853
@@ -122,6 +126,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
 
-PODFILE CHECKSUM: 0619858c1390c13735416af1a51d20517daac3f3
+PODFILE CHECKSUM: 3ded89c8e5d5d35b3429a2f8a8dbf8996c38a98e
 
 COCOAPODS: 1.6.1

@@ -117,7 +117,7 @@ class CenterCenter: UIViewController {
            print(showingNumber!,"\(accountingSum),\(targetBudget)")
             
             todayBalance.text! = String(targetBudget-accountingSum)
-//------------------bar chart------------
+// MARK:-bar chart-
             let chartConfig = BarsChartConfig(
                 valsAxisConfig : ChartAxisConfig(from:0 , to:100 ,by:10)
             )
@@ -150,6 +150,21 @@ class CenterCenter: UIViewController {
         }
 
   
+    }
+    
+    @IBAction func help(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToPCTest", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "goToPCTest" {
+
+            let secondVC = segue.destination as! pageviewcontroller
+
+            secondVC.testValue = true
+            
+
+        }
     }
 //--------------------alert function---------------------
     func showAlertMessage(title: String, message: String) {

@@ -15,7 +15,7 @@ class ForgotPassword: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://1b6994f3.ngrok.io/accounts/password/reset/")
+        let url = URL(string: "https://"+UrlId+".ngrok.io/accounts/password/reset/")
         let request = URLRequest(url :url!)
         
         WebView.load(request)

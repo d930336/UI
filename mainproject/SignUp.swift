@@ -21,8 +21,7 @@ class SignUp: UIViewController {
         // 这个session可以使用刚才创建的。
         let session = URLSession(configuration: .default)
         // 设置URL
-        //let url = "https://a113b628.ngrok.io/rest-auth/registration/"
-        var request = URLRequest(url: URL(string: "https://1b6994f3.ngrok.io/rest-auth/registration/")!)
+        var request = URLRequest(url: URL(string: "https://"+UrlId+".ngrok.io/rest-auth/registration/")!)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         

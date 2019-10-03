@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import Firebase
 import GoogleSignIn
+import BWWalkthrough
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterDelegate {

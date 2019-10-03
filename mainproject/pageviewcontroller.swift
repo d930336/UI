@@ -8,13 +8,16 @@
 
 import UIKit
 import UserNotifications
+import BWWalkthrough
 
-class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
+class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,BWWalkthroughViewControllerDelegate{
 
     
     
     var list = [UIViewController]()
     var received : Int = 1
+    var testValue = false
+    var userDefaults = UserDefaults.standard
   /*
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -27,28 +30,60 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
         }
     }
     */
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if testValue == true{
+             showWalkthrough()
+            userDefaults.set(true, forKey: "walkthroughPresented")
+            userDefaults.synchronize()
+        }
+        
+        if !userDefaults.bool(forKey: "walkthroughPresented") {
+            
+            showWalkthrough()
+            
+            userDefaults.set(true, forKey: "walkthroughPresented")
+            userDefaults.synchronize()
+        }
+    }
+    
+    func showWalkthrough(){
+        
+        // Get view controllers and build the walkthrough
+        let stb = UIStoryboard(name: "welcomePage", bundle: nil)
+        let walkthrough = stb.instantiateViewController(withIdentifier: "walk") as! BWWalkthroughViewController
+        let page_zero = stb.instantiateViewController(withIdentifier: "walk0")
+        let page_one = stb.instantiateViewController(withIdentifier: "walk1")
+        let page_two = stb.instantiateViewController(withIdentifier: "walk2")
+        let page_three = stb.instantiateViewController(withIdentifier: "walk3")
+        
+        // Attach the pages to the master
+        walkthrough.delegate = self as? BWWalkthroughViewControllerDelegate
+        walkthrough.add(viewController:page_one)
+        walkthrough.add(viewController:page_two)
+        walkthrough.add(viewController:page_three)
+        walkthrough.add(viewController:page_zero)
+        
+        self.present(walkthrough, animated: true, completion: nil)
+    }
+    // MARK: - Walkthrough delegate -
+    
+    func walkthroughPageDidChange(_ pageNumber: Int) {
+        print("Current Page \(pageNumber)")
+    }
+    
+    func walkthroughCloseButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK:- viewDidload Begin -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
-//------------notification-------------------
-//        let content = UNMutableNotificationContent()
-//        content.title = "發大財"
-//        //        content.subtitle = "subtitle："
-//        content.body = "記一筆？ 台灣發大財關心您"
-//        content.badge = 0
-//        content.sound = UNNotificationSound.default
-//
-//        let date = Date(timeIntervalSinceNow: 36000)
-//
-//      let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//
-//        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
-//
-//
-//    UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
-//        print("成功建立通知...")
-//        })
-//------------page controll------------------
+// MARK:--page controll--
         let p0 = storyboard?.instantiateViewController(withIdentifier: "p0")
         let p1 = storyboard?.instantiateViewController(withIdentifier: "p1")
         let p2 = storyboard?.instantiateViewController(withIdentifier: "p2")
@@ -63,7 +98,7 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource{
         dataSource = self
         // Do any additional setup after loading the view.
     }
-    
+// MARK: view didload end
   
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
