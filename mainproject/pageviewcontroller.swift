@@ -11,8 +11,6 @@ import UserNotifications
 import BWWalkthrough
 
 class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,BWWalkthroughViewControllerDelegate{
-
-    
     
     var list = [UIViewController]()
     var received : Int = 1
@@ -57,13 +55,17 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,
         let page_one = stb.instantiateViewController(withIdentifier: "walk1")
         let page_two = stb.instantiateViewController(withIdentifier: "walk2")
         let page_three = stb.instantiateViewController(withIdentifier: "walk3")
+        let page_four = stb.instantiateViewController(withIdentifier: "walk4")
+
         
         // Attach the pages to the master
-        walkthrough.delegate = self as? BWWalkthroughViewControllerDelegate
+        walkthrough.delegate = self as BWWalkthroughViewControllerDelegate
         walkthrough.add(viewController:page_one)
         walkthrough.add(viewController:page_two)
         walkthrough.add(viewController:page_three)
         walkthrough.add(viewController:page_zero)
+        walkthrough.add(viewController:page_four)
+
         
         self.present(walkthrough, animated: true, completion: nil)
     }
@@ -82,7 +84,25 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        print(firstCheck)
+        
+        if !userToken.bool(forKey: "fisrtCheck"){
+            if firstCheck == "0" && logoutCheck == false{
+                firstCheck = firstCheckStore
+            }else if firstCheck == "0"{
+                self.showAlertMessage(title: "省錢生活", message: "登入以開啟其餘功能")
+            }
+        }
+        
+//        if !userToken.bool(forKey: "sqliteCheck"){
+            if secondCheck == false{
+                secondCheck = sqliteCheck
+            }
+//        }
+        
+        print(firstCheck)
+        print(secondCheck)
+        
 // MARK:--page controll--
         let p0 = storyboard?.instantiateViewController(withIdentifier: "p0")
         let p1 = storyboard?.instantiateViewController(withIdentifier: "p1")
@@ -96,8 +116,8 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,
         
 
         dataSource = self
-        // Do any additional setup after loading the view.
     }
+    
 // MARK: view didload end
   
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -118,15 +138,22 @@ class pageviewcontroller: UIPageViewController , UIPageViewControllerDataSource,
         return nil
     }
 
- /*
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return list.count
-    }
+    // MARK: Alert
+      func showAlertMessage(title: String, message: String) {
+              let inputErrorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert) //產生AlertController
+              let okAction = UIAlertAction(title: "確認", style: .default, handler: nil) // 產生確認按鍵
+              inputErrorAlert.addAction(okAction) // 將確認按鍵加入AlertController
+              self.present(inputErrorAlert, animated: true, completion: nil) // 顯示Alert
+          }
+//
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        return list.count
+//    }
+//
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        return 1
+//    }
     
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 1
-    }
-    */
     
  
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import SQLite
-import SQLite3
 import UserNotifications
 
 enum OperationType{
@@ -46,30 +45,32 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         }
     }
     
-// MARK: - sqlite-
+    @IBAction func back(_ sender: Any) {
+        couponDiscount = "0"
+    }
+    
+    
+    // MARK: - sqlite-
     
     var database: Connection!
     
-    let usersTable = Table("AccountingPage1")
     let id = Expression<Int>("id")
     let sqDate = Expression<String>("date")
     let sqName = Expression<String>("name")
     let sqPrice = Expression<Int>("price")
-
-    
+    let sqCoupon = Expression<String>("coupon")
+    let sqDiscount = Expression<Int>("discount")
+    let sqMonth = Expression<String>("month")
+    let sqSave = Expression<Int>("save")
     
  // MARK: - type---------------------
     
     @IBOutlet weak var pickerView: UIPickerView!
   
     @IBOutlet weak var tableView: UITableView!
-    
-  
-    
-    let types = ["","Tools","Traffic","beverage","Place","Food","Sneak","Other"]
-    
-    
-  
+
+    let types = ["工具","交通","飲料","土地","食物","零食","其他"]
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -90,24 +91,28 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         return NSAttributedString(string:types[row] , attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
     }
  
-  // MARK: - ------date picker-------------------
+  // MARK: - date picker
+    
     var datedata : String!
+    var monthdata: String!
+    
     @IBOutlet weak var getDateValue: UIDatePicker!
    
-   
-    
-    
     @IBAction func dateAction(_ sender: UIDatePicker) {
         let dateValue = DateFormatter()
         dateValue.dateFormat = "MMdd" // 設定要顯示在Text Field的日期時間格式
         datedata = dateValue.string(from: getDateValue.date) // 更新Text Field的內容
 //        getDateValue.setValue(UIColor.black, forKeyPath: "textColor") 轉動時變顏色
+        
+        let monthValue = DateFormatter()
+        monthValue.dateFormat = "MM"
+        monthdata = monthValue.string(from: getDateValue.date)
     }
     
     
     
     
- // MARK: - --------------------calculator-------------------------------
+ // MARK: - calculator -
     
     @IBOutlet weak var total: UILabel!
     
@@ -166,6 +171,19 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         }
     }
     
+    
+    @IBAction func deleteNum(_ sender: Any) {
+        if total.text?.count == 1{
+            total.text = "0"
+        }else{
+            numberOnScreen = Double(total.text!.dropLast())!
+            makeOkNumberString(from: numberOnScreen)
+        }
+        performingMath = true
+        startNew = false
+    }
+    
+    
     func makeOkNumberString(from number:Double) {
         if floor(number) == number{
             total.text = "\(Int(number))"
@@ -181,25 +199,37 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     var dailyDetailForm : [DailyDetailForm] = []
 
-  // MARK: - --viewdidload-------------------------
+                    // MARK: - viewdidload -
+    
     override func viewDidLoad() {
-       
+        
+        tableView.scrollToBottomRow()
         super.viewDidLoad()
         getDateValue.setValue(UIColor.black, forKeyPath: "textColor")
-//        tableView.transform = CGAffineTransform(rotationAngle: .pi) ㄓ反方向
+//        tableView.transform = CGAffineTransform(rotationAngle: .pi) 反方向
         
-   
-// MARK: - ----initiate the date to today
+        if couponDiscount != "0" {
+            total.text = couponDiscount
+            total.textColor = UIColor.red
+        }
+        
+        // MARK: - ----initiate the date to today
         let todaysDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMdd"
         let dateString = dateFormatter.string(from: todaysDate)
         datedata = dateString
-    
- // MARK: - ----initiate the picker value
-        pickerView.selectRow(1, inComponent: 0, animated: true) //initiate the value of picker
         
-      
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MM"
+        let monthString = monthFormatter.string(from: todaysDate)
+        monthdata = monthString
+        
+ // MARK: - ----initiate the picker value
+        pickerView.selectRow(0, inComponent: 0, animated: true) //initiate the value of picker
+        
+        typeShow = "工具"
+
         selectedBackgroundView.backgroundColor = UIColor.clear
         
         dailyDetailForm = createArray()
@@ -219,29 +249,54 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
         print("CREATE TAPPED")
         
-        let createTable = self.usersTable.create { (table) in
+        let createTable = usersTableAP.create { (table) in
             table.column(self.id, primaryKey: true)
             table.column(self.sqDate, unique: false)
             table.column(self.sqName, unique: false)
             table.column(self.sqPrice, unique: false)
+            table.column(self.sqCoupon, unique: false)
+            table.column(self.sqDiscount, unique: false)
+            table.column(self.sqMonth, unique: false)
+            table.column(self.sqSave, unique: false)
+            
         }
+        userToken.set(true, forKey: "sqliteCheck")
+        secondCheck = true
         
+//        let createCouponTable = usersTableCP.create { (table) in
+//            table.column(self.id, primaryKey: true)
+//            table.column(sqcouponListUrl, unique: false)
+//            table.column(sqcouponDiscount, unique: false)
+//            table.column(sqcouponTitle, unique: false)
+//
+//        }
+
         do {
             try self.database.run(createTable)
+//            try self.database.run(createCouponTable)
             print("Created Table")
+            userToken.set(true, forKey: "sqliteCheck")
+            secondCheck = true
         } catch {
             print(error)
         }
         
-        
         do {
-            let users = try self.database.prepare(self.usersTable)
+            let listQuery = usersTableAP.order(sqDate,sqName)
+            let users = try self.database.prepare(listQuery)
             for user in users {
+                var getSqCoupon = "\(user[self.sqCoupon])"
+                var getSqSave = "-\(user[sqSave])"
+                if "\(user[self.sqCoupon])" == ""{
+                    getSqCoupon = "none"
+                    getSqSave = ""
+                }
                 
-                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-                let daily1 = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
-                
-                dailyDetailForm.append(daily1)
+                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice]),coupon:\(user[self.sqCoupon]),month: \(user[self.sqMonth])")
+              
+                let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id:"\(user[self.id])",save:getSqSave)
+                                
+                dailyDetailForm.append(daily)
                 
                 let indexPath = IndexPath(row: dailyDetailForm.count - 1,section :0)
                 tableView.beginUpdates()
@@ -250,7 +305,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
                 
                 }
             
-             let query = usersTable.select(self.sqPrice.sum,sqName)
+             let query = usersTableAP.select(self.sqPrice.sum,sqName)
                 for user  in (try? database?.prepare(query))!! {
                     if user[self.sqPrice.sum] ?? 0 > 0 {
                     print("\(user[self.sqPrice.sum]! )")
@@ -271,9 +326,13 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
         if recognizer.state == .recognized {
-            print("Screen edge swiped!")
-            show((storyboard?.instantiateViewController(withIdentifier: "pageController"))! , sender: nil)
-        }
+            let vc = (storyboard?.instantiateViewController(withIdentifier: "pageController"))
+            vc?.modalPresentationStyle = .fullScreen
+            vc?.modalTransitionStyle = .crossDissolve
+                    present(vc!, animated: true )
+
+        //            show((storyboard?.instantiateViewController(withIdentifier: "pageController"))! , sender: nil)
+                }
     }
     
     
@@ -282,7 +341,7 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
     
     @IBAction func deleteAll(_ sender: Any) {
         
-        let del = usersTable
+        let del = usersTableAP
         
                 if let count = try? self.database.run(del.delete()) {
                     print("删除的条数为：\(count)")
@@ -291,12 +350,14 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
                 }
         
     }
+    var cellData :String = ""
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        dailyDetailForm.remove(at: indexPath.row)
+        dailyDetailForm.remove(at: indexPath.row-1)
         tableView.beginUpdates()
-        tableView.deleteRows(at: [indexPath], with: .bottom)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
+        
 // MARK:-delete from sqlite-------------------
       
 //        let del = usersTable
@@ -307,8 +368,9 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
 //            print("删除失败")
 //        }
         
-    
-        let firstDel = usersTable.filter(id == indexPath.row+1)
+        let dailyDetailFormId = Int(dailyDetailForm[indexPath.row-1].id) ?? 0
+        print(dailyDetailFormId)
+        let firstDel = usersTableAP.filter(id == dailyDetailFormId)
         if let count = try? self.database.run(firstDel.delete()) {
             print("删除的条数为：\(count)")
         } else {
@@ -344,30 +406,53 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
   // MARK:-insert row-
     
     @IBAction func insert(_ sender: UIButton) {
+        print(cellData)
         insertNewRow()
+        tableView.scrollToBottomRow()
+        total.text = "0"
+        total.textColor = UIColor(red: 0.048, green: 0.18, blue: 0.235, alpha: 1)
+        resetTheCouponValue()
     }
+    
   // MARK:---sqlite insert (save)
 
     func insertNewRow() {
                 
         print("INSERT TAPPED")
-        
+        let getCouponTitle:String? = couponTitle
+        var getCouponDiscount:Int? = 0
+        var getCouponSave:Int? = 0
+        if couponDiscount != "0"{
+             getCouponDiscount = Int("\(couponDiscount)")
+             getCouponSave = Int("\(couponSave)")
+        }
             guard let sqDate = datedata,
                   let sqName = typeShow,
-                let sqPrice = Int(total.text ?? "0")
+                let sqPrice = Int(total.text ?? "0"),
+                let sqMonth = monthdata,
+                let sqCoupon = getCouponTitle,
+                let sqDiscount = getCouponDiscount,
+                let sqSave = getCouponSave
                 else { return }
-            print(sqDate)
-            print(sqName)
-            print(sqPrice)
-            let insertUser = self.usersTable.insert(self.sqDate <- sqDate, self.sqName <- sqName, self.sqPrice <- sqPrice)
+           
+        let insertUser = usersTableAP.insert(self.sqDate <- sqDate
+            , self.sqName <- sqName
+            , self.sqPrice <- sqPrice
+            , self.sqCoupon <- sqCoupon
+            , self.sqDiscount <- sqDiscount
+            , self.sqMonth <- sqMonth
+            , self.sqSave <- sqSave)
             
             do {
                 try self.database.run(insertUser)
-                print("INSERTED USER")
+                let dailyInsert = DailyDetailForm(Date: "\(sqDate)", Name: " \(sqName)", Price: "\(sqPrice)", Coupon: "none",id:"0",save:"")
+                let dailyInsertWithCoupon = DailyDetailForm(Date: "\(sqDate)", Name: " \(sqName)", Price: "\(sqPrice)", Coupon: "\(sqCoupon)",id:"0",save: "-\(sqSave)")
                 
-                let dailyInsert = DailyDetailForm(Date: "\(sqDate)", Name: " \(sqName)", Price: "\(sqPrice)", Coupon: "none")
-                
+                if couponDiscount == "0"{
                 dailyDetailForm.append(dailyInsert)
+                }else{
+                dailyDetailForm.append(dailyInsertWithCoupon)
+                }
                 
                 let indexPath = IndexPath(row: dailyDetailForm.count - 1,section :0)
                 tableView.beginUpdates()
@@ -379,7 +464,6 @@ class DailyDetail: UIViewController ,UIPickerViewDataSource,UIPickerViewDelegate
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
-    
    
     func createArray() -> [DailyDetailForm]{
         
@@ -421,13 +505,50 @@ extension DailyDetail:UITableViewDataSource,UITableViewDelegate {
         cell.layer.shadowRadius = 5
         cell.layer.cornerRadius = 12
         cell.clipsToBounds = false
+        cell.id.text = dailyDetailForms.id
         
         return cell
         
     }
-    
-   
-    
 }
+extension UITableView {
+    func scrollToBottomRow() {
+        DispatchQueue.main.async {
+            guard self.numberOfSections > 0 else { return }
+
+            // Make an attempt to use the bottom-most section with at least one row
+            var section = max(self.numberOfSections - 1, 0)
+            var row = max(self.numberOfRows(inSection: section) - 1, 0)
+            var indexPath = IndexPath(row: row, section: section)
+
+            // Ensure the index path is valid, otherwise use the section above (sections can
+            // contain 0 rows which leads to an invalid index path)
+            while !self.indexPathIsValid(indexPath) {
+                section = max(section - 1, 0)
+                row = max(self.numberOfRows(inSection: section) - 1, 0)
+                indexPath = IndexPath(row: row, section: section)
+
+                // If we're down to the last section, attempt to use the first row
+                if indexPath.section == 0 {
+                    indexPath = IndexPath(row: 0, section: 0)
+                    break
+                }
+            }
+
+            // In the case that [0, 0] is valid (perhaps no data source?), ensure we don't encounter an
+            // exception here
+            guard self.indexPathIsValid(indexPath) else { return }
+
+            self.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
+    func indexPathIsValid(_ indexPath: IndexPath) -> Bool {
+        let section = indexPath.section
+        let row = indexPath.row
+        return section < self.numberOfSections && row < self.numberOfRows(inSection: section)
+    }
+}
+
 
 

@@ -1,4 +1,7 @@
 PODS:
+  - BlueCryptor (1.0.32)
+  - BlueECC (1.2.5)
+  - BlueRSA (1.0.34)
   - BWWalkthrough (3.0.1)
   - Firebase/Analytics (5.19.0):
     - Firebase/Core
@@ -69,6 +72,11 @@ PODS:
   - GoogleUtilities/UserDefaults (5.5.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
+  - KituraContracts (1.2.1):
+    - LoggerAPI (~> 1.7)
+  - LoggerAPI (1.9.0):
+    - Logging (~> 1.1)
+  - Logging (1.1.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -79,6 +87,12 @@ PODS:
     - SQLite.swift/standard (= 0.11.5)
   - SQLite.swift/standard (0.11.5)
   - SwiftCharts (0.6.3)
+  - SwiftJWT (3.5.3):
+    - BlueCryptor (~> 1.0)
+    - BlueECC (~> 1.1)
+    - BlueRSA (~> 1.0)
+    - KituraContracts (~> 1.1)
+    - LoggerAPI (~> 1.7)
 
 DEPENDENCIES:
   - BWWalkthrough
@@ -88,9 +102,13 @@ DEPENDENCIES:
   - PieCharts
   - SQLite.swift (~> 0.11.5)
   - SwiftCharts (~> 0.6.3)
+  - SwiftJWT
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BlueCryptor
+    - BlueECC
+    - BlueRSA
     - BWWalkthrough
     - Firebase
     - FirebaseAnalytics
@@ -103,12 +121,19 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
+    - KituraContracts
+    - LoggerAPI
+    - Logging
     - nanopb
     - PieCharts
     - SQLite.swift
     - SwiftCharts
+    - SwiftJWT
 
 SPEC CHECKSUMS:
+  BlueCryptor: b0aee3d9b8f367b49b30de11cda90e1735571c24
+  BlueECC: 0d18e93347d3ec6d41416de21c1ffa4d4cd3c2cc
+  BlueRSA: 6f9776d62d9773502415a7db3bcbb2bbb3f71fc3
   BWWalkthrough: 8c0909d2a20791560816f5f03213557dd52a8a0d
   Firebase: c60d49e9c2630875a96207d15e2affb8364996d1
   FirebaseAnalytics: fd72a26bf8dac84cefba2f0864366f718555a5b0
@@ -121,11 +146,15 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  KituraContracts: e845e60dc8627ad0a76fa55ef20a45451d8f830b
+  LoggerAPI: fb78461eedac5316b290f2404d88b9d614d96c57
+  Logging: c1d514914944d786e0f17a41a6431e44a88a7ec1
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PieCharts: 30e50dfa7dc19e5b84e9878d32089673ef5d0453
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
+  SwiftJWT: 9a47a71090cae25767078756b5810e3b630aa9a7
 
-PODFILE CHECKSUM: 3ded89c8e5d5d35b3429a2f8a8dbf8996c38a98e
+PODFILE CHECKSUM: d37306912ae4d852d19835c244837bc6528c0eb6
 
 COCOAPODS: 1.6.1

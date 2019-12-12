@@ -9,8 +9,8 @@ class CenterCenter: UIViewController {
     var chartView : BarsChart!
 //----------------------balance------------------------
     
-    @IBOutlet weak var todaySave: UILabel!
     @IBOutlet weak var todayBalance: UILabel!
+    @IBOutlet weak var monthSave: UILabel!
     
 //----------------------sqlite----------------------------
     var database: Connection!
@@ -23,7 +23,6 @@ class CenterCenter: UIViewController {
 
 //----------------daily detail sq var-----------------
    
-    let usersTableAP = Table("AccountingPage1")
     let sqDate = Expression<String>("date")
     let sqName = Expression<String>("name")
     let sqPrice = Expression<Int>("price")
@@ -40,7 +39,7 @@ class CenterCenter: UIViewController {
         
     
         let content = UNMutableNotificationContent()
-        content.title = "發大財"
+        content.title = "省錢生活"
 //        content.subtitle = "subtitle："
         content.body = "本月餘額已用盡"
         content.badge = 1
@@ -93,30 +92,64 @@ class CenterCenter: UIViewController {
 //----------------daily detail sq---------------
         print("APLIST TAPPED")
             
-            let users2 = try self.database.prepare(self.usersTableAP)
+            let users2 = try self.database.prepare(usersTableAP)
             for user in users2 {
                 
                 print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
             }
-           
-            let query = usersTableAP.select(self.sqPrice.sum,sqName)
-           
-            for user  in (try? database?.prepare(query))!! {
+                  
+            
+            
+            //MARK: - get month data -
+            let todaysDate =  Calendar.current.date(byAdding: .month, value: 0, to: Date())
+            let monthFormatter = DateFormatter()
+            monthFormatter.dateFormat = "MM"
+            let monthString = monthFormatter.string(from: todaysDate!)
+            let monthdata = monthString
+            
+            let thisMonth = usersTableAP
+                .filter(sqMonth == monthdata)
+                .select(self.sqPrice.sum,sqMonth).group(sqMonth)
+            
+            let thisMonthSave = usersTableAP
+                .filter(sqMonth == monthdata)
+                .select(sqSave.sum,sqMonth).group(sqMonth)
+               
+            for user  in (try? database?.prepare(thisMonth))!! {
                if user[self.sqPrice.sum] ?? 0 > 0 {
                 
                 accountingSum = user[self.sqPrice.sum]!
                 print("Accounting sum:  \(user[self.sqPrice.sum]!)")
+                
+                }else{
+                print("0")
+                }              
+            }
+            for user  in (try? database?.prepare(thisMonthSave))!! {
+               if user[sqSave.sum] ?? 0 > 0 {
+                
+                let formatter = NumberFormatter()
+                    formatter.numberStyle = .currency
+                    formatter.maximumFractionDigits = 0
+                let Msave:String = formatter.string(from: NSNumber(value:(user[sqSave.sum]!))) ?? ""
+                
+                monthSave.text! = Msave
+                
                 }else{
                 print("0")
                 }
-              
             }
            
             let numberTrans = String(format: "%.2f", Float(accountingSum)/Float(targetBudget)*100)
             let showingNumber = Float(numberTrans)
            print(showingNumber!,"\(accountingSum),\(targetBudget)")
-            
-            todayBalance.text! = String(targetBudget-accountingSum)
+            let formatter = NumberFormatter()
+                formatter.numberStyle = .currency
+                formatter.maximumFractionDigits = 0
+                          
+            let Balance:String = formatter.string(from: NSNumber(value:(targetBudget-accountingSum))) ?? ""
+            todayBalance.text! = Balance
+
 // MARK:-bar chart-
             let chartConfig = BarsChartConfig(
                 valsAxisConfig : ChartAxisConfig(from:0 , to:100 ,by:10)
@@ -141,9 +174,13 @@ class CenterCenter: UIViewController {
             self.view.addSubview(chart.view)
             self.chartView = chart
 //---------------act notification-------------
-            if targetBudget-accountingSum<0{ UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
+            
+            if (targetBudget-accountingSum<0){
+                if (firstCheck == "1"){
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
                     print("成功建立通知...")
                 })
+                }
             }
         } catch {
             print(error)
@@ -151,7 +188,7 @@ class CenterCenter: UIViewController {
 
   
     }
-    
+//MARK: - help -
     @IBAction func help(_ sender: Any) {
         self.performSegue(withIdentifier: "goToPCTest", sender: nil)
     }

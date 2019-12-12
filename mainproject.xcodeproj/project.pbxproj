@@ -15,12 +15,16 @@
 		8D1BC2F122F037830075BBAE /* CenterLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BC2F022F037830075BBAE /* CenterLeftCell.swift */; };
 		8D234C1222396A1200661202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D234C1122396A1200661202 /* AppDelegate.swift */; };
 		8D234C1722396A1200661202 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D234C1522396A1200661202 /* Main.storyboard */; };
-		8D234C1C22396A1300661202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D234C1A22396A1300661202 /* LaunchScreen.storyboard */; };
 		8D26CC6B233485C600661DD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */; };
 		8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */; };
 		8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */; };
+		8D34298A234DCBE200FF293F /* RightChartPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D342989234DCBE200FF293F /* RightChartPage.swift */; };
+		8D39AACA23754738009D2BC3 /* CouponPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D39AAC923754738009D2BC3 /* CouponPage.swift */; };
 		8D39B73F2244D1FB001A9358 /* CenterCenterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */; };
-		8D3BB0B323459D9B00EFF00A /* StringPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BB0B223459D9B00EFF00A /* StringPage.swift */; };
+		8D3BB0B323459D9B00EFF00A /* VarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BB0B223459D9B00EFF00A /* VarPage.swift */; };
+		8D3D86A92358010A008EEC58 /* RefreshContents.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D86A823580109008EEC58 /* RefreshContents.xib */; };
+		8D3D86AB23581EBF008EEC58 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D86AA23581EBF008EEC58 /* MotherBoard.swift */; };
+		8D3FAF4E234DBA9600C26251 /* UibuttonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAF4D234DBA9500C26251 /* UibuttonExtension.swift */; };
 		8D5A88B92340A6E900E5D0A6 /* welcomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */; };
 		8D5A88BB2340A9B900E5D0A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */; };
 		8D5A88BD2340A9C900E5D0A6 /* CustomPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */; };
@@ -75,15 +79,19 @@
 		8D234C0E22396A1200661202 /* mainproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mainproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D234C1122396A1200661202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D234C1622396A1200661202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8D234C1B22396A1300661202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D234C1D22396A1300661202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D234C2222396A1300661202 /* mainprojectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mainprojectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D234C2D22396A1300661202 /* mainprojectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mainprojectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D2870242272F68700E2CEC8 /* DailyDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailForm.swift; sourceTree = "<group>"; };
 		8D2870262272F69900E2CEC8 /* DailyDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDetailCell.swift; sourceTree = "<group>"; };
+		8D342989234DCBE200FF293F /* RightChartPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightChartPage.swift; sourceTree = "<group>"; };
+		8D39AAC923754738009D2BC3 /* CouponPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponPage.swift; sourceTree = "<group>"; };
 		8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCenterPage.swift; sourceTree = "<group>"; };
-		8D3BB0B223459D9B00EFF00A /* StringPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPage.swift; sourceTree = "<group>"; };
+		8D3BB0B223459D9B00EFF00A /* VarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarPage.swift; sourceTree = "<group>"; };
+		8D3D86A823580109008EEC58 /* RefreshContents.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshContents.xib; sourceTree = "<group>"; };
+		8D3D86AA23581EBF008EEC58 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		8D3FAF4D234DBA9500C26251 /* UibuttonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UibuttonExtension.swift; sourceTree = "<group>"; };
 		8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = welcomePage.storyboard; sourceTree = "<group>"; };
 		8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "../../../../Downloads/BWWalkthrough-master/Example/ViewController.swift"; sourceTree = "<group>"; };
 		8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageViewController.swift; sourceTree = "<group>"; };
@@ -176,11 +184,12 @@
 				8D26CC6A233485C600661DD7 /* GoogleService-Info.plist */,
 				8D7795BB22A7B66500770F08 /* BridgeHeader.h */,
 				8D234C1122396A1200661202 /* AppDelegate.swift */,
-				8D3BB0B223459D9B00EFF00A /* StringPage.swift */,
+				8D3BB0B223459D9B00EFF00A /* VarPage.swift */,
 				8D5A88B82340A6E900E5D0A6 /* welcomePage.storyboard */,
 				8D5A88BC2340A9C900E5D0A6 /* CustomPageViewController.swift */,
 				8D5A88BA2340A9B900E5D0A6 /* ViewController.swift */,
 				8D234C1522396A1200661202 /* Main.storyboard */,
+				8D3D86AA23581EBF008EEC58 /* MotherBoard.swift */,
 				8D9B9515223A626900B02102 /* pageviewcontroller.swift */,
 				8D39B73E2244D1FB001A9358 /* CenterCenterPage.swift */,
 				8D640CCC225F393B0090CEEF /* CenterPage.swift */,
@@ -199,11 +208,14 @@
 				8D1A8803233766B700E9BC5B /* RightPage.swift */,
 				8D1A88072337719000E9BC5B /* CouponArrayFormat.swift */,
 				8D1A88052337705200E9BC5B /* CouponCellFormat.swift */,
+				8D39AAC923754738009D2BC3 /* CouponPage.swift */,
 				8DF76CAB22DDB28300B4CD7E /* GoogleLogin.swift */,
 				8D9B957D2241613D00B02102 /* WebView.swift */,
+				8D3FAF4D234DBA9500C26251 /* UibuttonExtension.swift */,
 				8D1BC2EE22F00CAE0075BBAE /* Lock.swift */,
+				8D342989234DCBE200FF293F /* RightChartPage.swift */,
+				8D3D86A823580109008EEC58 /* RefreshContents.xib */,
 				8DF76CA922D5C98000B4CD7E /* Assets.xcassets */,
-				8D234C1A22396A1300661202 /* LaunchScreen.storyboard */,
 				8D234C1D22396A1300661202 /* Info.plist */,
 			);
 			path = mainproject;
@@ -329,11 +341,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D234C1C22396A1300661202 /* LaunchScreen.storyboard in Resources */,
 				8D26CC6B233485C600661DD7 /* GoogleService-Info.plist in Resources */,
 				8DF76CAA22D5C98000B4CD7E /* Assets.xcassets in Resources */,
 				8D234C1722396A1200661202 /* Main.storyboard in Resources */,
 				8D5A88B92340A6E900E5D0A6 /* welcomePage.storyboard in Resources */,
+				8D3D86A92358010A008EEC58 /* RefreshContents.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,12 +398,19 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-mainproject/Pods-mainproject-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BWWalkthrough/BWWalkthrough.framework",
+				"${BUILT_PRODUCTS_DIR}/BlueCryptor/Cryptor.framework",
+				"${BUILT_PRODUCTS_DIR}/BlueECC/CryptorECC.framework",
+				"${BUILT_PRODUCTS_DIR}/BlueRSA/CryptorRSA.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/KituraContracts/KituraContracts.framework",
+				"${BUILT_PRODUCTS_DIR}/LoggerAPI/LoggerAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/Logging/Logging.framework",
 				"${BUILT_PRODUCTS_DIR}/PieCharts/PieCharts.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftJWT/SwiftJWT.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -399,12 +418,19 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BWWalkthrough.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cryptor.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptorECC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptorRSA.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KituraContracts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoggerAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Logging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PieCharts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftJWT.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,11 +515,14 @@
 				8D640CC5225B38730090CEEF /* CenterLeft.swift in Sources */,
 				8D615E3D2338963C00FEF86C /* TestPage.swift in Sources */,
 				8D1BC2EF22F00CAE0075BBAE /* Lock.swift in Sources */,
+				8D39AACA23754738009D2BC3 /* CouponPage.swift in Sources */,
 				8D2870272272F69A00E2CEC8 /* DailyDetailCell.swift in Sources */,
+				8D3FAF4E234DBA9600C26251 /* UibuttonExtension.swift in Sources */,
 				8D640CC7225B38870090CEEF /* CenterRight.swift in Sources */,
 				8D9B9516223A626900B02102 /* pageviewcontroller.swift in Sources */,
 				8D5A88BB2340A9B900E5D0A6 /* ViewController.swift in Sources */,
 				8D5A88BD2340A9C900E5D0A6 /* CustomPageViewController.swift in Sources */,
+				8D34298A234DCBE200FF293F /* RightChartPage.swift in Sources */,
 				8D1A88062337705200E9BC5B /* CouponCellFormat.swift in Sources */,
 				8DF76CAC22DDB28300B4CD7E /* GoogleLogin.swift in Sources */,
 				8D2870252272F68700E2CEC8 /* DailyDetailForm.swift in Sources */,
@@ -506,10 +535,11 @@
 				8D1A8804233766B700E9BC5B /* RightPage.swift in Sources */,
 				8D39B73F2244D1FB001A9358 /* CenterCenterPage.swift in Sources */,
 				8D77965C22C5F4DD00770F08 /* SignUp.swift in Sources */,
+				8D3D86AB23581EBF008EEC58 /* MotherBoard.swift in Sources */,
 				8DE06815224CF8BC00173DAA /* CenterCenter.swift in Sources */,
 				8D779567229E889A00770F08 /* TargetPage.swift in Sources */,
 				8D1A88082337719000E9BC5B /* CouponArrayFormat.swift in Sources */,
-				8D3BB0B323459D9B00EFF00A /* StringPage.swift in Sources */,
+				8D3BB0B323459D9B00EFF00A /* VarPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,14 +579,6 @@
 				8D234C1622396A1200661202 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8D234C1A22396A1300661202 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8D234C1B22396A1300661202 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -613,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -668,7 +690,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -686,12 +708,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7MP4S8GA9;
 				INFOPLIST_FILE = mainproject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.mainproject;
+				PRODUCT_BUNDLE_IDENTIFIER = bensonyang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -706,12 +728,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7MP4S8GA9;
 				INFOPLIST_FILE = mainproject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.mainproject;
+				PRODUCT_BUNDLE_IDENTIFIER = bensonyang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

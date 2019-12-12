@@ -1,6 +1,5 @@
 import UIKit
 import SQLite
-import SQLite3
 
 class CenterLeft: UIViewController {
     
@@ -8,7 +7,7 @@ class CenterLeft: UIViewController {
     
     var database: Connection!
     
-    let usersTable = Table("AccountingPage1")
+    
     let id = Expression<Int>("id")
     let sqDate = Expression<String>("date")
     let sqName = Expression<String>("name")
@@ -44,12 +43,18 @@ class CenterLeft: UIViewController {
         print("LIST TAPPED")
         
         do {
-            let users = try self.database.prepare(self.usersTable)
+            let listQuery = usersTableAP.order(sqDate,sqName)
+            let users = try self.database.prepare(listQuery)
             for user in users {
-                
+                var getSqCoupon = "\(user[sqCoupon])"
+                var getsqSave = "-\(user[sqSave])"
+                               if "\(user[sqCoupon])" == ""{
+                                    getSqCoupon = "none"
+                                    getsqSave = ""
+                               }
                 print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
              
-                let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
+                let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id:"\(user[self.id])",save: getsqSave)
                 
                 centerLeftList.append(daily)
                 
@@ -71,36 +76,32 @@ class CenterLeft: UIViewController {
         self.background.layer.shadowRadius = 5
         
         
-        
-    
-//--------------view didlord end-------------
     }
-//--------------search bar-------------------
+    
+//MARK:-view didlord end--
+ 
+    
+    
+//MARK:-search bar-
+ 
     var buttonCheck = true
     
     @IBOutlet weak var buttonView: UIButton!
     
     @IBAction func beginEdit(_ sender: Any) {
+        
+        buttonView.flash()        
         buttonView.setImage(UIImage(named: "searchReload")?.withRenderingMode(.alwaysOriginal), for:[])
         buttonCheck = false
     }
    
     @IBAction func endEdit(_ sender: Any) {
+       
+        buttonView.flash()
         buttonView.setImage(UIImage(named: "search")?.withRenderingMode(.alwaysOriginal), for:[])
         buttonCheck = true
+
     }
-    
-    
-    //    func textfieldTest() {
-//
-//        // self.activeTextField.text is an optional, we safely unwrap it here
-//        if let activeTextFieldText = self.searchBar.text {
-//            print("Active text field's text: \(activeTextFieldText)")
-//            return;
-//        }
-//
-//        print("Active text field is empty")
-//    }
     
     
     @IBAction func submit(_ sender: Any) {
@@ -112,16 +113,22 @@ class CenterLeft: UIViewController {
             centerLeftList.removeAll()
             tableView.reloadData()
 
+            var searchControll = usersTableAP.filter(sqMonth == "\(searchBar.text ?? "")")
+           
+            if (searchBar.text?.count ?? 0 ) == 4{
+                searchControll = usersTableAP.filter(sqDate == "\(searchBar.text ?? "")")
+            }else{
+                searchControll = usersTableAP.filter(sqMonth == "\(searchBar.text ?? "")")
+            }
         do {
             
-            let searching = usersTable.filter(sqDate == "\(searchBar.text ?? "")")
-            let users = try self.database.prepare(searching)
+            let users = try self.database.prepare(searchControll)
             for user in users {
 
-                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
+                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice]), month: \(user[sqMonth])")
 
-                let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
-
+                let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: " \(user[sqCoupon])",id: "\(user[self.id])",save:"-\(user[sqSave])")
+ 
                 centerLeftList.append(daily)
 
                 let indexPath = IndexPath(row: centerLeftList.count - 1,section :0)
@@ -138,12 +145,17 @@ class CenterLeft: UIViewController {
              tableView.reloadData()
             do {
                 print("2")
-                let users = try self.database.prepare(self.usersTable)
+                let users = try self.database.prepare(usersTableAP)
                 for user in users {
-                    
+                    var getSqCoupon = "\(user[sqCoupon])"
+                    var getsqSave = "-\(user[sqSave])"
+                                                  if "\(user[sqCoupon])" == ""{
+                                                        getSqCoupon = "none"
+                                                        getsqSave = ""
+                                                  }
                     print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
                     
-                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
+                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id:"\(user[self.id])",save: getsqSave)
                     
                     centerLeftList.append(daily)
                     
@@ -158,19 +170,24 @@ class CenterLeft: UIViewController {
             }
         }
         }
-//----------------search cancel--------------
+//MARK: --search cancel--
         else{
         
             centerLeftList.removeAll()
             tableView.reloadData()
             searchBar.text = ""
             do {
-                let users = try self.database.prepare(self.usersTable)
+                let users = try self.database.prepare(usersTableAP)
                 for user in users {
-                    
+                    var getSqCoupon = "\(user[sqCoupon])"
+                    var getsqSave = "-\(user[sqSave])"
+                        if "\(user[sqCoupon])" == ""{
+                            getSqCoupon = "none"
+                            getsqSave = ""
+                            }
                     print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
                     
-                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
+                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id: "\(user[self.id])",save: getsqSave)
                     
                     centerLeftList.append(daily)
                     
@@ -187,7 +204,18 @@ class CenterLeft: UIViewController {
         }
     }
     
-    //-------------------touching return-----------------------
+    //MARK: -  set max lengh to text  -
+       func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           guard let textFieldText = searchBar.text,
+               let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                   return false
+           }
+           let substringToReplace = textFieldText[rangeOfTextToReplace]
+           let count = textFieldText.count - substringToReplace.count + string.count
+           return count <= 4
+       }
+    
+    //MARK:--touching return--
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -206,16 +234,26 @@ class CenterLeft: UIViewController {
             
             centerLeftList.removeAll()
             tableView.reloadData()
-            
+            var searchControll = usersTableAP.filter(sqMonth == "\(searchBar.text ?? "")")
+                      
+                if (searchBar.text?.count ?? 0 ) == 4{
+                    searchControll = usersTableAP.filter(sqDate == "\(searchBar.text ?? "")")
+                }else{
+                    searchControll = usersTableAP.filter(sqMonth == "\(searchBar.text ?? "")")
+                }
             do {
                 
-                let searching = usersTable.filter(sqDate == "\(searchBar.text ?? "")")
-                let users = try self.database.prepare(searching)
+                let users = try self.database.prepare(searchControll)
                 for user in users {
+                    var getSqCoupon = "\(user[sqCoupon])"
+                    var getSqSave = "-\(user[sqSave])"
+                        if "\(user[sqCoupon])" == ""{
+                            getSqCoupon = "none"
+                            getSqSave = ""
+                        }
+                    print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice]), month: \(user[sqMonth])")
                     
-                    print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-                    
-                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
+                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id:"\(user[self.id])", save: getSqSave)
                     
                     centerLeftList.append(daily)
                     
@@ -233,12 +271,19 @@ class CenterLeft: UIViewController {
             tableView.reloadData()
             do {
                 print("2")
-                let users = try self.database.prepare(self.usersTable)
+                let users = try self.database.prepare(usersTableAP)
                 for user in users {
+                    
+                    var getSqCoupon = "\(user[sqCoupon])"
+                    var getSqSave = "-\(user[sqSave])"
+                            if "\(user[sqCoupon])" == ""{
+                                getSqCoupon = "none"
+                                getSqSave = ""
+                            }
                     
                     print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
                     
-                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: "none")
+                    let daily = DailyDetailForm(Date: "\(user[self.sqDate])", Name: " \(user[self.sqName])", Price: "\(user[self.sqPrice])", Coupon: getSqCoupon,id: "\(user[self.id])",save:getSqSave)
                     
                     centerLeftList.append(daily)
                     

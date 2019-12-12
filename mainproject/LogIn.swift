@@ -10,21 +10,25 @@ import UIKit
 import Foundation
 import SQLite
 
-class LogIn: UIViewController {
+class LogIn: UIViewController,UITextFieldDelegate {
    
-
+    
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
-   
+    var receiveUsername:String = ""
+    var receivePassword:String = ""
+    
     @IBAction func login(_ sender: Any) {
-  
-        print("1")
-        print("INSERT TAPPED")
-        
-        
 
-        
+        userToken.set(username.text! , forKey: "userId")
+        userToken.set(password.text!, forKey:"userPassword")
+        firstCheck = "1"
+        userToken.set(firstCheck, forKey: "firstCheck")
+        userToken.synchronize()
+
+        print("INSERT TAPPED")
+//MARK: - Post -
         // 这个session可以使用刚才创建的。
         let session = URLSession(configuration: .default)
         // 设置URL
@@ -45,57 +49,32 @@ class LogIn: UIViewController {
         print("3")
         let task = session.dataTask(with: request) {(data, response, error) in
             do {
-               
                 let r = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                 print(r)
                 print("2")
-                let rToken = "1"
-                let rerror =  "2"
-                
-                if r["token"] != nil{
-                    let rToken =  r["token"]as! String
-                    let insertUser =
-                        self.usersTable.insert(
-                            self.token <- rToken as! String
-                    )
-                    do {
-                        try self.database.run(insertUser)
-                        print("INSERTED USER")
-                        
-                    }catch {
-                        print(error)
-                    }
-                }
-               
+                let rToken = r["token"]as! String
+                //MARK: - store the Token -
+                self.showAlertMessage(title:"登入成功",message:"")
+
+                    userToken.set(rToken , forKey: "Token")
+                    userToken.synchronize()
+
                 if r["non_field_errors"] != nil{
                      let rerror =  r["non_field_errors"]as! String
-                    
+                    self.showAlertMessage(title:"登入失敗",message:rerror)
                 }
-               
-//                    let insertUser =
-//                    self.usersTable.insert(
-//                        self.token <- rToken as! String
-//                    )
-//                    do {
-//                        try self.database.run(insertUser)
-//                        print("INSERTED USER")
-//
-//                    }catch {
-//                        print(error)
-//                    }
-                
-                
-            } catch {
+
+        } catch {
                 print("无法连接到服务器")
                 print("張詠峻喔")
+            self.showAlertMessage(title:"登入失敗",message:"伺服器未開")
                 return
             }
         }
         task.resume()
-        
-        
-        print("2")
-//-------------------------------get------------------------------------
+        print("done")
+    
+//-------------------------------get toturial------------------------------------
 //    // 创建一个会话，这个会话可以复用
 //    let session = URLSession(configuration: .default)
 //    // 设置URL
@@ -118,6 +97,45 @@ class LogIn: UIViewController {
 //-----------------------------------------------------------------------
   
 }
+    
+    //MARK:- Log out -
+
+    @IBAction func logOut(_ sender: Any) {
+        userToken.set("" , forKey: "Token")
+        userToken.set("" , forKey: "userId")
+        userToken.set("", forKey: "userPassword")
+        showAlertMessage(title:"登出成功",message:"")
+        firstCheck = "0"
+        userToken.set(0, forKey: "firstCheck")
+        userToken.synchronize()
+        username.text = ""
+        password.text = ""
+        logoutCheck = true
+    }
+
+            // MARK: Alert
+    func showAlertMessage(title: String, message: String) {
+        let inputErrorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert) //產生AlertController
+        let okAction = UIAlertAction(title: "確認", style: .default, handler: nil) // 產生確認按鍵
+        inputErrorAlert.addAction(okAction) // 將確認按鍵加入AlertController
+        DispatchQueue.main.async {
+        self.present(inputErrorAlert, animated: true, completion: nil) // 顯示Alert
+        }
+    }
+            
+  //MARK: -  set max lengh to text  -
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 15
+    }
+    
+    
+    // MARK: - SQlite -
     var database: Connection!
     let usersTable = Table("Token1")
     let id = Expression<Int>("id")
@@ -125,31 +143,22 @@ class LogIn: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
-        do {
-            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileUrl = documentDirectory.appendingPathComponent("users").appendingPathExtension("sqlite3")
-            let database = try Connection(fileUrl.path)
-            
-            self.database = database
-            print("connected")
-        } catch {
-            print(error)
+             
+        if receiveUsername != ""||receivePassword != ""{
+        username.text = receiveUsername
+        password.text = receivePassword
+        }else{
+            if firstCheck == "1"{
+        username.text = "\(getUserId)"
+        password.text = "\(getUserPassword)"
+            }
         }
+        //MARK: - swipe -
         
-        print("CREATE TAPPED")
-        
-        let createTable = self.usersTable.create { (table) in
-            table.column(self.id, primaryKey: true)
-            table.column(self.token, unique: false)
-        }
-        do {
-            try self.database.run(createTable)
-            print("Created Table")
-        } catch {
-            print(error)
-        }
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+              edgePan.edges = .right
+              
+              view.addGestureRecognizer(edgePan)
         
         
     }
@@ -164,4 +173,24 @@ class LogIn: UIViewController {
     }
 
 
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            let vc = (storyboard?.instantiateViewController(withIdentifier: "pageController"))
+            vc?.modalPresentationStyle = .fullScreen
+            vc?.modalTransitionStyle = .crossDissolve
+                    present(vc!, animated: true )
+
+                }
+    }
+    
 }
+func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+      if segue.identifier == "goToPC" {
+
+          let secondVC = segue.destination as! pageviewcontroller
+
+          secondVC.received = 1
+
+      }
+  }

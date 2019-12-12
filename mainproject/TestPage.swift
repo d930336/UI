@@ -37,8 +37,21 @@ class TestPage: UIViewController {
         show((storyboard?.instantiateViewController(withIdentifier: "pageController"))! , sender: nil)
             }
         }
- 
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+            if segue.identifier == "goToPC" {
+
+                let secondVC = segue.destination as! pageviewcontroller
+
+                secondVC.received = 0
+
+            }
+        }
     
+    
+    @IBAction func back(_ sender: Any) {
+         self.performSegue(withIdentifier: "goToPC", sender: nil)
+    }
     
     
     override func didReceiveMemoryWarning() {

@@ -10,6 +10,8 @@ import UIKit
 import WebKit
 class WebView: UIViewController {
     
+    var receivedUrl:String = ""
+    
     @IBAction func nextPage(_ sender: Any) {
         self.performSegue(withIdentifier: "goToPC", sender: nil)
     }
@@ -25,12 +27,16 @@ class WebView: UIViewController {
         }
     }
     
+    @IBAction func back(_ sender: Any) {
+        resetTheCouponValue()
+    }
+    
     @IBOutlet weak var WebView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = URL(string: "http://www.google.com")
+        let url = URL(string: couponListUrl)
         let request = URLRequest(url :url!)
         
         WebView.load(request)

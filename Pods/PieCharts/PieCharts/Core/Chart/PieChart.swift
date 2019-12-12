@@ -237,7 +237,7 @@ import UIKit
         strokeColor = UIColor.lightGray
         
         let models = (0..<6).map {_ in
-            PieSliceModel(value: 2, color: UIColor.clear)
+            PieSliceModel(value: 2, color: UIColor.clear,obj:"")
         }
         
         self.models = models

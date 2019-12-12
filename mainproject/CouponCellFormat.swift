@@ -10,17 +10,20 @@ import UIKit
 
 class CouponCellFormat: UITableViewCell {
 
-  
     @IBOutlet weak var Store: UILabel!
     @IBOutlet weak var Content: UILabel!
     @IBOutlet weak var Kind: UILabel!
-    
-    
+    @IBOutlet weak var url: UILabel!
+    @IBOutlet weak var discount: UILabel!
+    @IBOutlet weak var save: UILabel!
     
     func setCoupon(coupon: CouponArrayFormat){
         Store.text = coupon.Store
         Content.text = coupon.Content
         Kind.text = coupon.Kind
+        url.text = coupon.url
+        discount.text = coupon.discount
+        save.text = coupon.save
     }
     
     

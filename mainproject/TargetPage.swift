@@ -9,6 +9,7 @@
 import UIKit
 import SQLite
 import UserNotifications
+import SwiftJWT
 
 class targetPage: UIViewController {
     
@@ -17,19 +18,41 @@ class targetPage: UIViewController {
     @IBOutlet weak var background: UIImageView!
     let usersTable = Table("targetPage1")
     let usersTable2 = Table("notification")
-    let usersTableUpload = Table("AccountingPage1")
     let id = Expression<Int>("id")
     let budget = Expression<Int>("budget")
     let turnSwitch = Expression<Int>("switch")
     let sqDate = Expression<String>("date")
     let sqName = Expression<String>("name")
+    let sqMonth = Expression<String>("month")
     let sqPrice = Expression<Int>("price")
     
-    
+//    let Token = userToken.value(forKey: "Token")
+  
     // MARK:--view didLoad-
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if firstCheck == "0"{
+                   //首先创建一个模糊效果
+                   let blurEffect = UIBlurEffect(style: .light)
+                   //接着创建一个承载模糊效果的视图
+                   let blurView = UIVisualEffectView(effect: blurEffect)
+                   //animation
+                    let flash = CABasicAnimation(keyPath: "opacity")
+                            flash.duration = 5
+                            flash.fromValue = 0.5
+                            flash.toValue = 1
+                            flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+//                            flash.autoreverses = true
+                            flash.repeatCount = 0
+                blurView.layer.add(flash, forKey: nil)
+                   //设置模糊视图的大小（全屏）
+                   blurView.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+                   //添加模糊视图到页面view上（模糊视图下方都会有模糊效果）
+                   self.view.addSubview(blurView)
+                   self.showAlertMessage(title: "省錢生活", message: "登入以開啟其餘功能")
+               }
         
         self.background.layer.shadowOpacity = 1
         self.background.layer.shadowColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).cgColor
@@ -82,19 +105,23 @@ class targetPage: UIViewController {
         do {
             let users = try self.database.prepare(self.usersTable)
             for user in users {
-                showTarget.text = "\((user[(self.budget)]))"
+                
+                let formatter = NumberFormatter()
+                formatter.locale = Locale(identifier: "zh_TW")
+                formatter.numberStyle = .currencyISOCode
+                formatter.maximumFractionDigits = 0
+                
+                showTarget.text = formatter.string(from: NSNumber(value:(user[self.budget])))
+             // showTarget.text = "\((user[(self.budget)]))"
                 print("userId: \(user[self.id]), budget: \((user[self.budget]))")
             }
         } catch {
             print(error)
         }
     }
+    
 // MARK: view didload end
     
-    
-    @IBAction func test2(_ sender: Any) {
-        self.performSegue(withIdentifier: "goToPCTest", sender: nil)
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "goToPCTest" {
@@ -105,7 +132,6 @@ class targetPage: UIViewController {
 
         }
     }
-    
     
                 // MARK:   upload
     var uploadArr  = [""]
@@ -118,20 +144,62 @@ class targetPage: UIViewController {
         generator.impactOccurred()
        
         do {
-            let users = try self.database.prepare(self.usersTableUpload)
-            for user in users {
-                
-                print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
-             
-                let daily = "userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])"
-                
-                uploadArr.append(daily)
+            let users = try self.database.prepare(usersTableAP)
+            let session = URLSession(configuration: .default)
+                                    // 设置URL
+            var request = URLRequest(url: URL(string: "https://"+UrlId+".ngrok.io/useraccouting/")!)
+                request.httpMethod = "POST"
+                request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+           
+            if userToken.bool(forKey: "Token") == true{
+                request.setValue("JWT "+(Token as! String), forHTTPHeaderField: "Authorization")
             }
             
+            var arrCheck:[String:String]=[:]
+            
+                for user in users {
+                          // 设置要post的内容，字典格式
+//
+//                    print("userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])")
+                                
+//                                   let daily = "userId: \(user[self.id]), date: \(user[self.sqDate]),name: \(user[self.sqName]),price: \(user[self.sqPrice])"
+//                                   uploadArr.append(daily)
+// MARK: - upload Post -
+                    request.setValue("JWT "+(Token as! String), forHTTPHeaderField: "Authorization")
+
+                    let postData = [
+                        "accounting_class":"\(user[self.sqName])"
+                        ,"accounting_data":"\(user[self.sqPrice])"
+                        ,"accounting_date":"\(user[self.sqDate])"
+                        ,"accounting_month":"\(user[self.sqMonth])"
+                        ,"accounting_coupon_name":"\(user[sqCoupon])"
+                        ,"accounting_discount":"\(user[sqSave])"
+                             ]
+                    let postString = postData.compactMap({ (key, value) -> String in
+                              return "\(key)=\(value)"
+                          }).joined(separator: "&")
+                          request.httpBody = postString.data(using: .utf8)
+                          // 后面不解释了，和GET的注释一样
+                          
+                    let task = session.dataTask(with: request) {(data, response, error) in
+                              do {
+                                  let r = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                                  print(r)
+                                  print("2")
+                              } catch {
+                                  print("无法连接到服务器")
+                                  print("張詠峻喔")
+                                  return
+                              }
+                          }
+                          task.resume()
+                        
+                arrCheck = postData
+            }
         } catch {
             print(error)
         }
-        print(uploadArr)
+ 
         showAlertMessage(title:"已成功上傳至雲端",message:"")
 
     }
@@ -146,7 +214,7 @@ class targetPage: UIViewController {
    
     
     @IBOutlet weak var showTarget: UILabel!
- // MARK:  target update
+ // MARK:  target upload
     @IBAction func list(_ sender: Any) {
 
     //button feedback
@@ -171,7 +239,14 @@ class targetPage: UIViewController {
         do {
             let users = try self.database.prepare(self.usersTable)
             for user in users {
-                showTarget.text = "\((user[self.budget]))"
+                
+            let formatter = NumberFormatter()
+                formatter.locale = Locale(identifier: "zh_TW")
+                formatter.numberStyle = .currencyISOCode
+                formatter.maximumFractionDigits = 0
+                
+                showTarget.text = formatter.string(from: NSNumber(value:(user[self.budget])))
+                
                 print("userId: \(user[self.id]), budget: \(user[self.budget])")
             }
         } catch {
@@ -179,8 +254,81 @@ class targetPage: UIViewController {
         }
     }
     
-    @IBOutlet weak var update: UITextField!
+    @IBOutlet weak var update: UITextField! 
  
+    //MARK:- Download -
+    
+    @IBAction func download(_ sender: Any) {
+                 // 创建一个会话，这个会话可以复用
+                let session = URLSession(configuration: .default)
+                // 设置URL
+                var request = URLRequest(url:URL(string:"https://"+UrlId+".ngrok.io/useraccouting/")!)
+                // 创建一个网络任务
+        //       if userToken.bool(forKey: "Token") == true{
+                request.setValue("JWT "+(Token as! String), forHTTPHeaderField: "Authorization")
+        //       }
+                request.httpMethod = "GET"
+                let task = session.dataTask(with: request) {(data, response, error) in
+                    do {
+                        connectDataBase()
+
+                        let del = usersTableAP
+                        
+                                if let count = try? self.database.run(del.delete()) {
+                                    print("删除的条数为：\(count)")
+                                } else {
+                                    print("删除失败")
+                                }
+                        
+                        let r = try JSONSerialization.jsonObject(with: data!,  options:JSONSerialization.ReadingOptions.mutableContainers)
+                        
+                        print(r)
+
+                        let rArray = r as! NSArray
+        
+                        for i in rArray{
+                           
+                            let download = i as! NSDictionary
+                            let sqDateInsert = "\(download["accounting_date"] ?? "")"
+                            let sqNameInsert = "\(download["accounting_class"] ?? "")"
+                            let sqPriceInsert = "\(download["accounting_data"] ?? "")"
+                            let sqPriceFinal = Int(sqPriceInsert) ?? 0
+                            let sqMonthInsert = "\(download["accounting_month"] ?? "")"
+                            let sqCouponInsert = "\(download["accounting_coupon_name"] ?? "")"
+                            let sqSaveInsert = "\(download["accounting_discount"] ?? "")"
+                            let sqSaveFinal = Int(sqSaveInsert) ?? 0
+                            
+                            let insertUser = usersTableAP.insert(self.sqDate <- sqDateInsert ,self.sqName <- sqNameInsert, self.sqPrice <- sqPriceFinal,self.sqMonth <- sqMonthInsert,sqCoupon <- sqCouponInsert, sqSave <- sqSaveFinal,sqDiscount <- sqPriceFinal)
+                            do {
+                                try self.database.run(insertUser)
+                                    } catch {
+                                    print(error)
+                                }
+                            print(sqDateInsert,sqNameInsert,sqPriceInsert,sqMonthInsert,sqSaveFinal)
+                            print(type(of: sqDateInsert),type(of: sqNameInsert),type(of: sqPriceInsert),type(of: sqMonthInsert),type(of: sqSaveFinal))
+                        }
+                    }catch {
+                        // 如果连接失败就...
+                        print("无法连接到服务器download")
+
+                        let content = UNMutableNotificationContent()
+                               content.title = "發大財"
+                               //        content.subtitle = "subtitle："
+                               content.body = "請先登入"
+                               content.badge = 0
+                               content.sound = UNNotificationSound.default
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+                                   UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
+                                       print("建立通知on")
+                                   })
+                        return
+                    }
+                }
+                task.resume()
+        showAlertMessage(title:"已成功下傳至手機",message:"")
+
+            }
     
     // MARK:-notification--
     
@@ -196,14 +344,14 @@ class targetPage: UIViewController {
     @IBAction func dailyNotification(_ sender: Any) {
         
         let content = UNMutableNotificationContent()
-        content.title = "發大財"
+        content.title = "省錢生活"
         //        content.subtitle = "subtitle："
         content.body = "記一筆？ 台灣發大財關心您"
         content.badge = 0
         content.sound = UNNotificationSound.default
         
         let content2 = UNMutableNotificationContent()
-        content2.title = "發大財"
+        content2.title = "省錢生活"
         //        content.subtitle = "subtitle："
         content2.body = "關提醒了 別忘記記帳！ 台灣發大財關心您"
         content2.badge = 0
@@ -225,7 +373,6 @@ class targetPage: UIViewController {
             userNotification.set(alertCheck, forKey: "userNotificationValue")
             alertCheck = false
         }else{
-            
             controll = triggerOff
             controllContent = content2
             let request = UNNotificationRequest(identifier: "notification", content: controllContent, trigger: controll)
@@ -236,9 +383,9 @@ class targetPage: UIViewController {
             alertCheck = true
         }
         alertImageControll()
-
+        
         }
-//  MARK:- Alert View image -
+//  MARK:- Notification View image -
     
     func alertImageControll(){
         
@@ -251,7 +398,15 @@ class targetPage: UIViewController {
             
         }
     }
+ 
+    @IBAction func testButton(_ sender: Any) {
+      
+        let printToken = userToken.value(forKey: "Token") as! String ?? ""
         
+        print(printToken)
+        showAlertMessage(title:printToken,message:"")
+        
+    }
     
 
         

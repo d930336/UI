@@ -15,13 +15,15 @@ class DailyDetailForm {
     var Name : String
     var Price : String
     var Coupon : String
- 
+    var id: String
+    var save :String
     
-    init(Date: String, Name: String, Price: String, Coupon: String){
+    init(Date: String, Name: String, Price: String, Coupon: String,id:String,save:String){
         self.Date = Date
         self.Name = Name
         self.Price = Price
         self.Coupon = Coupon
-        
+        self.id = id
+        self.save = save
     }
 }

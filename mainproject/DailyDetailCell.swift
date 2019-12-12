@@ -21,12 +21,17 @@ class DailyDetailCell: UITableViewCell {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var id: UILabel!
+    @IBOutlet weak var save: UILabel!
+    
     
     func setDailyDetailForm(dailyDetailForm: DailyDetailForm){
         name.text = dailyDetailForm.Name
         price.text = dailyDetailForm.Price
         date.text = dailyDetailForm.Date
         coupon.text = dailyDetailForm.Coupon
+        id.text = dailyDetailForm.id
+        save.text = dailyDetailForm.save
     }
     
     override var frame: CGRect {

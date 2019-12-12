@@ -14,12 +14,14 @@ class CenterLeftCell: UITableViewCell {
     @IBOutlet weak var clName: UILabel!
     @IBOutlet weak var clPrice: UILabel!
     @IBOutlet weak var clCoupon: UILabel!
+    @IBOutlet weak var clSave: UILabel!
     
     func setCenterLeftList(centerLeftList: DailyDetailForm){
         clName.text = centerLeftList.Name
         clPrice.text = centerLeftList.Price
         clDate.text = centerLeftList.Date
         clCoupon.text = centerLeftList.Coupon
+        clSave.text = centerLeftList.save
     }
     override var frame: CGRect {
         get {

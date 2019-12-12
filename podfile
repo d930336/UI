@@ -11,7 +11,7 @@ pod 'PieCharts'
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'GoogleSignIn'
-
+pod 'SwiftJWT'
   # Pods for mainproject
 
   target 'mainprojectTests' do
