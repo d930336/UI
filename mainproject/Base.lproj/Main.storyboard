@@ -211,17 +211,6 @@
                                     <action selector="logOut:" destination="Klg-Qx-puH" eventType="touchUpInside" id="tRX-Zd-xF2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-9F-z9B">
-                                <rect key="frame" x="16" y="55" width="93" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="返回">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Pc6-cf-mvn" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="2k9-S5-Zzc"/>
-                                </connections>
-                            </button>
                             <button autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8yz-UJ-pig">
                                 <rect key="frame" x="207" y="512" width="133" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -231,6 +220,17 @@
                                 </state>
                                 <connections>
                                     <segue destination="X1U-pI-k4f" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="Dx7-qK-es1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-9F-z9B">
+                                <rect key="frame" x="0.0" y="55" width="93" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="返回">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Pc6-cf-mvn" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="2k9-S5-Zzc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1534,8 +1534,9 @@
         <image name="專題LOGO (White)" width="445" height="404"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Uuf-W5-GgI"/>
         <segue reference="XMd-NJ-JgW"/>
-        <segue reference="9kk-6l-eoy"/>
-        <segue reference="9MJ-Wl-qVz"/>
+        <segue reference="2k9-S5-Zzc"/>
+        <segue reference="Bn8-Ze-XdU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -11,15 +11,8 @@ import UIKit
 import SQLite
 
 //MARK:common
-public class common{
-    var UrlId :String = "de94cb8f"
-    
-    init(UrlId:String) {
-        self.UrlId = UrlId
-    }
-}
 
-public var UrlId :String = "de94cb8f"
+public var UrlId :String = "e1551071"
 public var userToken = UserDefaults.standard
 public var firstCheck:String = "0"
 public var secondCheck:Bool = false

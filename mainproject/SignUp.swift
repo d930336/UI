@@ -51,9 +51,9 @@ class SignUp: UIViewController,UITextFieldDelegate {
             } catch {
                 print("无法连接到服务器")
                 print("張詠峻喔")
-                
+                print(error)
                 DispatchQueue.main.async {
-                    self.showAlertMessage(title: "註冊失敗", message: "")
+                    self.showAlertMessage(title: "註冊失敗", message: "\(error)")
                 }
                 
                 return
